@@ -69,38 +69,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-leetcode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/11/undefined/" class="article-date">
-  <time class="dt-published" datetime="2024-01-11T15:40:22.923Z" itemprop="datePublished">2024-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://lxh11111.github.io/2024/01/11/undefined/" data-id="clr9dmq9k000004497xel1j89" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-base" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/01/10/undefined/" class="article-date">
-  <time class="dt-published" datetime="2024-01-09T16:00:00.000Z" itemprop="datePublished">2024-01-10</time>
+    <a href="/2024/01/11/undefined/" class="article-date">
+  <time class="dt-published" datetime="2024-01-10T16:00:00.000Z" itemprop="datePublished">2024-01-11</time>
 </a>
     
   </div>
@@ -111,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/10/undefined/">base</a>
+      <a class="p-name article-title" href="/2024/01/11/undefined/">BASE</a>
     </h1>
   
 
@@ -161,7 +133,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">d.setTime(time+=<span class="number">2</span>*<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 
 <h5 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h5><p>日期格式化</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间/日期格式化</span></span><br><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</span>);<span class="comment">//格式化</span></span><br><span class="line">String rs=sdf.format(d);<span class="comment">//日期转换成字符串</span></span><br><span class="line">String rs1=sdf.format(time);<span class="comment">//时间转换成字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//解析</span></span><br><span class="line">String a=<span class="string">&quot;2024-1-10 20:07&quot;</span>;</span><br><span class="line">SimpleDateFormat sdf1=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);<span class="comment">//格式</span></span><br><span class="line">Date d1=sdf1.parse(a);<span class="comment">//解析 抛出异常</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间/日期格式化</span></span><br><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</span>);<span class="comment">//格式化</span></span><br><span class="line">String rs=sdf.format(d);<span class="comment">//日期转换成字符串</span></span><br><span class="line">String rs1=sdf.format(time);<span class="comment">//时间转换成字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//解析</span></span><br><span class="line">String a=<span class="string">&quot;2024-1-11 20:07&quot;</span>;</span><br><span class="line">SimpleDateFormat sdf1=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);<span class="comment">//格式</span></span><br><span class="line">Date d1=sdf1.parse(a);<span class="comment">//解析 抛出异常</span></span><br></pre></td></tr></table></figure>
 
 <h5 id="Calender"><a href="#Calender" class="headerlink" title="Calender"></a>Calender</h5><p>当前日历,主要用于修改日期时间<br>***可变对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Calendar c=Calendar.getInstance();</span><br><span class="line"><span class="type">int</span> days=c.get(Calendar.DAY_OF_YEAR);</span><br><span class="line">Date d2=c.getTime();<span class="comment">//获取</span></span><br><span class="line"><span class="type">long</span> time1=c.getTimeInMillis();</span><br><span class="line">c.set(Calendar.YEAR,<span class="number">2025</span>);<span class="comment">//修改</span></span><br><span class="line">c.add(Calendar.YEAR,<span class="number">1</span>);<span class="comment">//增加</span></span><br></pre></td></tr></table></figure>
@@ -173,7 +145,45 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lxh11111.github.io/2024/01/10/undefined/" data-id="clr9dh7g90001yo4962yxbel4" data-title="base" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://lxh11111.github.io/2024/01/11/undefined/" data-id="clr9dh7g90001yo4962yxbel4" data-title="BASE" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-leetcode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/11/undefined/" class="article-date">
+  <time class="dt-published" datetime="2024-01-10T16:00:00.000Z" itemprop="datePublished">2024-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/01/11/undefined/">ALGORITHM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lxh11111.github.io/2024/01/11/undefined/" data-id="clr9dmq9k000004497xel1j89" data-title="ALGORITHM" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -254,11 +264,11 @@
       <ul>
         
           <li>
-            <a href="/2024/01/11/undefined/">(no title)</a>
+            <a href="/2024/01/11/undefined/">BASE</a>
           </li>
         
           <li>
-            <a href="/2024/01/10/undefined/">base</a>
+            <a href="/2024/01/11/undefined/">ALGORITHM</a>
           </li>
         
           <li>
