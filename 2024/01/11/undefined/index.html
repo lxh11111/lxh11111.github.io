@@ -4,17 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>ALGORITHM | star</title>
+  <title>BASE | star</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="ALGORITHM">
+  <meta name="description" content="基础语法updating…是的，如你所见，正在从后往前补，还没补到 :-( 面向对象updating….是的，如你所见，正在从后往前补，还没补到 :-( API常用API(一)updating…是的，如你所见，正在从后往前补，还没补到 :-( 常用API(二)Objects类base所有类的对象都可以用，默认继承 123456789public String toString()&#123;&#x2F;&#x2F;默">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BASE">
 <meta property="og:url" content="https://lxh11111.github.io/2024/01/11/undefined/index.html">
 <meta property="og:site_name" content="star">
+<meta property="og:description" content="基础语法updating…是的，如你所见，正在从后往前补，还没补到 :-( 面向对象updating….是的，如你所见，正在从后往前补，还没补到 :-( API常用API(一)updating…是的，如你所见，正在从后往前补，还没补到 :-( 常用API(二)Objects类base所有类的对象都可以用，默认继承 123456789public String toString()&#123;&#x2F;&#x2F;默">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lxh11111.github.io/image-1.png">
 <meta property="article:published_time" content="2024-01-10T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-01-11T16:14:25.345Z">
 <meta property="article:author" content="lxh11111">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lxh11111.github.io/image-1.png">
   
     <link rel="alternate" href="/atom.xml" title="star" type="application/atom+xml">
   
@@ -69,7 +73,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-leetcode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-base" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/01/11/undefined/" class="article-date">
   <time class="dt-published" datetime="2024-01-10T16:00:00.000Z" itemprop="datePublished">2024-01-11</time>
@@ -83,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      ALGORITHM
+      BASE
     </h1>
   
 
@@ -91,11 +95,61 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p>updating….<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h2 id="常用API-一"><a href="#常用API-一" class="headerlink" title="常用API(一)"></a>常用API(一)</h2><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
+<h2 id="常用API-二"><a href="#常用API-二" class="headerlink" title="常用API(二)"></a>常用API(二)</h2><h3 id="Objects类"><a href="#Objects类" class="headerlink" title="Objects类"></a>Objects类</h3><h4 id="base"><a href="#base" class="headerlink" title="base"></a>base</h4><p>所有类的对象都可以用，默认继承</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;<span class="comment">//默认输出地址,主要用于子类重载方法，返回具体内容</span></span><br><span class="line">     <span class="keyword">return</span> ...;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span>&#123;<span class="comment">//默认比较地址（==），重载比较内容</span></span><br><span class="line">     <span class="keyword">return</span> ...;<span class="comment">//1.比较地址2.null||比较类型 getClass()3.比较成员</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">clone</span><span class="params">()</span>&#123;<span class="comment">//需要标记接口 implements Cloneable</span></span><br><span class="line">     <span class="keyword">return</span> <span class="built_in">super</span>.clone();<span class="comment">//子类重载，抛出异常</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="浅克隆-深克隆"><a href="#浅克隆-深克隆" class="headerlink" title="浅克隆&#x2F;深克隆"></a>浅克隆&#x2F;深克隆</h4><p>浅拷贝：堆内存中拷贝地址<br>深拷贝：数据直接拷贝，字符串拷贝地址（字符串常量池），其他对象则创建新对象—–重载</p>
+<h4 id="一些静态方法"><a href="#一些静态方法" class="headerlink" title="一些静态方法"></a>一些静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Objects.equals(s1,s2);<span class="comment">//相比字符串的equals方法（注意空指针异常），先进行非空判断</span></span><br><span class="line">Objects.isNull(s1);<span class="comment">//s1==null</span></span><br><span class="line">Objects.nonNull(s1);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>把基本数据类型包装成对象<br><img src="/image-1.png" alt="Alt text"></p>
+<h4 id="一些静态方法-用于泛型和集合（引用数据类型）"><a href="#一些静态方法-用于泛型和集合（引用数据类型）" class="headerlink" title="一些静态方法(用于泛型和集合（引用数据类型）)"></a>一些静态方法(用于泛型和集合（引用数据类型）)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应用于泛型和集合</span></span><br><span class="line">ArrayList&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成字符串</span></span><br><span class="line">String s1=Integer.toString(a);</span><br><span class="line">String s1=a.toString();<span class="comment">//继承Objects类toString()方法</span></span><br><span class="line">String s1=a+<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串类型的数值转换成对应</span></span><br><span class="line"><span class="type">int</span> a=Integer.parseInt(s1);<span class="comment">//注意转换类型</span></span><br><span class="line"><span class="type">int</span> a=Integer.valueOf(s1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><p>容器，方便修改字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder s=<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;111&quot;</span>);<span class="comment">//直接返回内容</span></span><br><span class="line"><span class="comment">//拼接 支持链式编程</span></span><br><span class="line">s.append(<span class="number">1</span>);</span><br><span class="line">s.append(<span class="number">1</span>).append(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//反转</span></span><br><span class="line">s.reverse();</span><br><span class="line"><span class="comment">//长度</span></span><br><span class="line">s.length();</span><br><span class="line"><span class="comment">//转换成String类型</span></span><br><span class="line">String s1=s.toString();</span><br></pre></td></tr></table></figure>
+
+<p>相比String，频繁拼接修改等效率更高</p>
+<h4 id="StringBuffer"><a href="#StringBuffer" class="headerlink" title="StringBuffer"></a>StringBuffer</h4><p>与StringBuilder用法一致</p>
+<p>StringBuilder  线程不安全<br>StringBuffer   线程安全</p>
+<h4 id="StringJoiner"><a href="#StringJoiner" class="headerlink" title="StringJoiner"></a>StringJoiner</h4><p>高效简洁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StringJoiner s1=<span class="keyword">new</span> <span class="title class_">StringJoiner</span>(<span class="string">&quot;,&quot;</span>,<span class="string">&quot;[&quot;</span>,<span class="string">&quot;]&quot;</span>);</span><br><span class="line">s1.add(<span class="number">1</span>+<span class="string">&quot;&quot;</span>);</span><br><span class="line">String s=s1.toString();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><h4 id="常用静态方法"><a href="#常用静态方法" class="headerlink" title="常用静态方法"></a>常用静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">abs</span><span class="params">(<span class="type">int</span> a)</span> <span class="comment">//绝对值 Math.abs(1.2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">ceil</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//向上取整 Math.ceil(1.2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">floor</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//向下取整</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">round</span><span class="params">(<span class="type">double</span> a)</span> <span class="comment">//四舍五入</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span> <span class="comment">//最大值</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">pow</span><span class="params">(<span class="type">double</span> a,<span class="type">double</span> b)</span> <span class="comment">//a的b次方</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">random</span><span class="params">()</span>; <span class="comment">//随机数[0.0,1.0)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exit</span><span class="params">(<span class="type">int</span> status)</span><span class="comment">//终止Java虚拟机</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">currentTimeMillis</span><span class="params">()</span><span class="comment">//当前系统时间ms</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h3><p>单例类</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runtime r=Runtime.getRuntime();</span><br><span class="line">r.availableProcessors();<span class="comment">//虚拟机使用的处理器数</span></span><br><span class="line">r.totalMemory();<span class="comment">//虚拟机内存总量--字节</span></span><br><span class="line">r.freeMemory();<span class="comment">//虚拟机可用内存量</span></span><br><span class="line">Process p=r.exec(<span class="string">&quot;路径“);//启动</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><p>解决浮点运算失真</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小数转字符串转BigDecimal</span></span><br><span class="line">BigDecimal a1=<span class="keyword">new</span> <span class="title class_">BigDecimal</span>.valueOf(a);</span><br><span class="line">BigDecimal b1=<span class="keyword">new</span> <span class="title class_">BigDecimal</span>.valueOf(b);</span><br><span class="line">BigDecimal c1=a1.add(b1);<span class="comment">//subtract multiply divide(可精确位数)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="时间日期"><a href="#时间日期" class="headerlink" title="时间日期"></a>时间日期</h3><h4 id="传统-非重点"><a href="#传统-非重点" class="headerlink" title="传统(非重点)"></a>传统(非重点)</h4><h5 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h5><p>获取时间&#x2F;日期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">d.setTime(time+=<span class="number">2</span>*<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h5><p>日期格式化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间/日期格式化</span></span><br><span class="line">Date d=<span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">long</span> time=d.getTime();<span class="comment">//ms</span></span><br><span class="line">SimpleDateFormat sdf=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</span>);<span class="comment">//格式化</span></span><br><span class="line">String rs=sdf.format(d);<span class="comment">//日期转换成字符串</span></span><br><span class="line">String rs1=sdf.format(time);<span class="comment">//时间转换成字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//解析</span></span><br><span class="line">String a=<span class="string">&quot;2024-1-11 20:07&quot;</span>;</span><br><span class="line">SimpleDateFormat sdf1=<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm&quot;</span>);<span class="comment">//格式</span></span><br><span class="line">Date d1=sdf1.parse(a);<span class="comment">//解析 抛出异常</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Calender"><a href="#Calender" class="headerlink" title="Calender"></a>Calender</h5><p>当前日历,主要用于修改日期时间<br>***可变对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Calendar c=Calendar.getInstance();</span><br><span class="line"><span class="type">int</span> days=c.get(Calendar.DAY_OF_YEAR);</span><br><span class="line">Date d2=c.getTime();<span class="comment">//获取</span></span><br><span class="line"><span class="type">long</span> time1=c.getTimeInMillis();</span><br><span class="line">c.set(Calendar.YEAR,<span class="number">2025</span>);<span class="comment">//修改</span></span><br><span class="line">c.add(Calendar.YEAR,<span class="number">1</span>);<span class="comment">//增加</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="JDK8新增-主要"><a href="#JDK8新增-主要" class="headerlink" title="JDK8新增(主要)"></a>JDK8新增(主要)</h4><h5 id="LocalDate-LocalTime-LocalDateTime-代替Calendar"><a href="#LocalDate-LocalTime-LocalDateTime-代替Calendar" class="headerlink" title="LocalDate LocalTime LocalDateTime 代替Calendar"></a>LocalDate LocalTime LocalDateTime 代替Calendar</h5><p>均为不可变对象，三个用法几乎相同</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">LocalDate ld=LocalDate.now();</span><br><span class="line"><span class="type">int</span> year=ld.getYear();<span class="comment">//获取</span></span><br><span class="line">LocalDate ld1=ld.withYear(<span class="number">2025</span>);<span class="comment">//修改</span></span><br><span class="line">LocalDate ld2=ld.plusYears(<span class="number">1</span>);<span class="comment">//minus</span></span><br><span class="line">LocalDate ld3=LocalDate.of(<span class="number">2025</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">ld1.equals(ld2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换</span></span><br><span class="line">LocalDateTime ld1=LocalDateTime.now();</span><br><span class="line">LocalDate ld2=ld1.toLocalDate();</span><br><span class="line">LocalTime ld3=ld1.toLocalTime();</span><br></pre></td></tr></table></figure>
+
+<h5 id="ZoneId-ZoneDateTime-代替Calendar"><a href="#ZoneId-ZoneDateTime-代替Calendar" class="headerlink" title="ZoneId ZoneDateTime 代替Calendar"></a>ZoneId ZoneDateTime 代替Calendar</h5><h5 id="Instant"><a href="#Instant" class="headerlink" title="Instant"></a>Instant</h5><h5 id="DateTimeFormatter"><a href="#DateTimeFormatter" class="headerlink" title="DateTimeFormatter"></a>DateTimeFormatter</h5><h5 id="Duration-Period"><a href="#Duration-Period" class="headerlink" title="Duration Period"></a>Duration Period</h5><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><h3 id="JDK8新特性"><a href="#JDK8新特性" class="headerlink" title="JDK8新特性"></a>JDK8新特性</h3><h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h4 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h4><h2 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h2><h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lxh11111.github.io/2024/01/11/undefined/" data-id="clr9dmq9k000004497xel1j89" data-title="ALGORITHM" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://lxh11111.github.io/2024/01/11/undefined/" data-id="clr9yo6f700024w494myn7dgp" data-title="BASE" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -109,7 +163,7 @@
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          BASE
+          ALGORITHM
         
       </div>
     </a>
@@ -155,11 +209,11 @@
       <ul>
         
           <li>
-            <a href="/2024/01/11/undefined/">BASE</a>
+            <a href="/2024/01/11/undefined/">ALGORITHM</a>
           </li>
         
           <li>
-            <a href="/2024/01/11/undefined/">ALGORITHM</a>
+            <a href="/2024/01/11/undefined/">BASE</a>
           </li>
         
           <li>
