@@ -288,6 +288,147 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
+                <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">ALGORITHM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2024-01-11T00:00:00+08:00">
+                2024-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index">
+                    <span itemprop="name">Learn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="面向Leetcode学习法"><a href="#面向Leetcode学习法" class="headerlink" title="面向Leetcode学习法"></a>面向Leetcode学习法</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lxh11111.github.io/2024/01/11/undefined/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="star">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
                 <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">BASE</a></h1>
         
 
@@ -435,150 +576,33 @@
 <p>· 打印流 PrintStream<code>ps.println() ps.write()</code> &#x2F; PrintWriter</p>
 <p>高效打印数据</p>
 <p>重定向<code>System.setOut(ps)</code></p>
-<p>· 数据流 DataInputStream &#x2F; DataOutputStream</p>
-<p>· 序列化流</p>
-<h4 id="IO流框架"><a href="#IO流框架" class="headerlink" title="IO流框架"></a>IO流框架</h4><h4 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h4><h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3>
-          
-        
-      
-    </div>
-    
-    
-    
+<p>· 数据流 DataInputStream<code>dis.writeUTF()</code> &#x2F; DataOutputStream<code>dos.writeUTF()</code></p>
+<p>传入数据和数据类型</p>
+<p>· 序列化流 ObjectInputStream<code>oos.writeObject()</code> &#x2F; ObjectOutputStream<code>oos.readObject()</code></p>
+<p>序列化接口<code>implements Serializable</code></p>
+<p>成员变量前加上<code>transient</code>不参与序列化</p>
+<p>序列化多个对象： <code>ArrayList</code> 已实现序列化接口</p>
+<h4 id="IO框架"><a href="#IO框架" class="headerlink" title="IO框架"></a>IO框架</h4><p>封装对文件、数据进行操作的代码</p>
+<p>Commons-io 框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入框架 融合</span></span><br><span class="line">FileUtils.copyDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\hexo&quot;</span>),<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\CodeField&quot;</span>));<span class="comment">//cpoyFile()</span></span><br><span class="line">FileUtils.deleteDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\aa&quot;</span>));</span><br></pre></td></tr></table></figure>
 
-    
+<h4 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h4><h5 id="Properties属性文件"><a href="#Properties属性文件" class="headerlink" title="Properties属性文件"></a>Properties属性文件</h5><p>本质-&gt;map</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Properties properties=<span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">properties.load(<span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;D:\\hexo\\sources&quot;</span>));</span><br><span class="line">properties.getProperty(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">properties.setProperty(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>);</span><br><span class="line">properties.store(<span class="keyword">new</span> <span class="title class_">FileWriter</span>(<span class="string">&quot;D:\\hexo\\sources&quot;</span>),<span class="string">&quot;save&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-    
+<h5 id="XML文件"><a href="#XML文件" class="headerlink" title="XML文件"></a>XML文件</h5><p>本质-&gt;数据格式</p>
+<p><code>&lt;tags&gt;</code> 做系统的配置文件 &#x2F; 特殊数据结构网络传输</p>
+<p>Dom4j-&gt;解析XML框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解析</span></span><br><span class="line">SAXReader saxReader=<span class="keyword">new</span> <span class="title class_">SAXReader</span>();</span><br><span class="line">Document document=saxReader.read(<span class="string">&quot;path&quot;</span>);</span><br><span class="line">Element root=document.getRootElement();</span><br><span class="line"><span class="comment">//存入拼接成XML----io流</span></span><br></pre></td></tr></table></figure>
 
-    
+<p>约束XML书写—限制格式</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>记录运行过程中的信息</p>
+<p>Logback框架</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//slf4j-api: 日志接口</span></span><br><span class="line"><span class="comment">//logback-core: 基础模块</span></span><br><span class="line"><span class="comment">//logback-classic: 实现slf4j API</span></span><br><span class="line"><span class="comment">//logback-access: http访问</span></span><br><span class="line"><span class="comment">//logback.xml---src下 配置</span></span><br><span class="line">Logger LOGGER=LoggerFactory.getLogger(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line">LOGGER.info(<span class="string">&quot;start&quot;</span>);</span><br><span class="line">LOGGER.debug(<span class="string">&quot;a&quot;</span>+a);</span><br></pre></td></tr></table></figure>
 
-    <footer class="post-footer">
-      
+<p>设置日志级别</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(trace) debug <span class="comment">//最低级别</span></span><br><span class="line">info 输出</span><br><span class="line">warn</span><br><span class="line">error</span><br></pre></td></tr></table></figure>
 
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lxh11111.github.io/2024/01/11/undefined/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="star">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">ALGORITHM</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2024-01-11T00:00:00+08:00">
-                2024-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learn/" itemprop="url" rel="index">
-                    <span itemprop="name">Learn</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="面向Leetcode学习法"><a href="#面向Leetcode学习法" class="headerlink" title="面向Leetcode学习法"></a>面向Leetcode学习法</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3>
           
         
       
