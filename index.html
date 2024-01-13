@@ -288,147 +288,6 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">ALGORITHM</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2024-01-11T00:00:00+08:00">
-                2024-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Learn/" itemprop="url" rel="index">
-                    <span itemprop="name">Learn</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="面向Leetcode学习法"><a href="#面向Leetcode学习法" class="headerlink" title="面向Leetcode学习法"></a>面向Leetcode学习法</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lxh11111.github.io/2024/01/11/undefined/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="star">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
                 <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">BASE</a></h1>
         
 
@@ -605,7 +464,158 @@
 <h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h4 id="创建多线程"><a href="#创建多线程" class="headerlink" title="创建多线程"></a>创建多线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.继承Thread</span></span><br><span class="line">Thread t=<span class="keyword">new</span> <span class="title class_">newThread</span>();</span><br><span class="line"><span class="comment">//子类继承Thread 重写run方法</span></span><br><span class="line"><span class="comment">//@Override</span></span><br><span class="line"><span class="comment">//public void run() &#123;</span></span><br><span class="line"><span class="comment">//   System.out.println(&quot;new&quot;);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">t.start();<span class="comment">//自动执行run</span></span><br><span class="line">System.out.println(<span class="string">&quot;main&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.Runnable接口</span></span><br><span class="line">Runnable t=<span class="keyword">new</span> <span class="title class_">newRunnable</span>();<span class="comment">//子类实现Runnable接口 封装成Thread线程对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(t).start();<span class="comment">//也可以通过匿名内部类 使用Lambda简化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Callable接口 可返回执行结果</span></span><br><span class="line">Callable&lt;Object&gt; ca=<span class="keyword">new</span> <span class="title class_">newCallable</span>(<span class="number">10</span>);</span><br><span class="line">FutureTask&lt;Object&gt; fu=<span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(ca);<span class="comment">//未来任务对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(fu).start();</span><br><span class="line">Object ob=fu.get();<span class="comment">//获取结果</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="Thread常用方法"><a href="#Thread常用方法" class="headerlink" title="Thread常用方法"></a>Thread常用方法</h4><p>· run()  start()<br>· currentThread()<br>· getName() setName() &#x2F;&#x2F;构造器直接写<br>· sleep()<br>· join() &#x2F;&#x2F;当前线程先执行完</p>
-<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><h5 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h5><p>解决线程安全问题</p>
+<p>加锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.同步代码块</span></span><br><span class="line"><span class="keyword">synchronized</span>(<span class="built_in">this</span>)<span class="comment">//共享资源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.同步方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> 返回值 方法名</span><br><span class="line"><span class="comment">//实例方法：this 静态方法：类名.class</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Lock锁 采用其实例类ReentrantLock创建对象</span></span><br><span class="line">Lock lk=<span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">lk.lock();</span><br><span class="line">lk.unlock();<span class="comment">//可采用finally</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h5><p>各线程间告知状态<br>· this.wait()<br>· this.notifyAll() </p>
+<h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>复用线程</p>
+<h5 id="创建线程池-接口ExecutorService"><a href="#创建线程池-接口ExecutorService" class="headerlink" title="创建线程池 接口ExecutorService"></a>创建线程池 接口ExecutorService</h5><p>1.ExecutorService实现类ThreadPoolExecutor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span><br><span class="line">ExecutorService pool=<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="title class_">ArrayBlockingQueue</span>&lt;&gt;(<span class="number">3</span>),Executors.defaultThreadFactory(),<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.AbortPolicy());</span><br></pre></td></tr></table></figure>
+
+<p>2.Executors</p>
+<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lxh11111.github.io/2024/01/11/undefined/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="star">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2024/01/11/undefined/" itemprop="url">ALGORITHM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2024-01-11T00:00:00+08:00">
+                2024-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learn/" itemprop="url" rel="index">
+                    <span itemprop="name">Learn</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="面向Leetcode学习法"><a href="#面向Leetcode学习法" class="headerlink" title="面向Leetcode学习法"></a>面向Leetcode学习法</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3>
           
         
       
