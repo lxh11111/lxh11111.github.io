@@ -416,31 +416,45 @@
 
 <h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>遍历多级文件夹&#x2F;删除非空文件夹</p>
 <p>直接&#x2F;间接</p>
-<h3 id="IO-读写文本数据"><a href="#IO-读写文本数据" class="headerlink" title="IO(读写文本数据)"></a>IO(读写文本数据)</h3><h4 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h4><p>· ASCII<br>· GBK 汉字2 英文数字1<br>· Unicode UTF-8 汉字3 英文数字1</p>
+<h3 id="IO-读写文本数据"><a href="#IO-读写文本数据" class="headerlink" title="IO(读写文本数据)"></a>IO(读写文本数据)</h3><h4 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h4><ul>
+<li>ASCII</li>
+<li>GBK 汉字2 英文数字1</li>
+<li>Unicode UTF-8 汉字3 英文数字1</li>
+</ul>
 <p>字符集编码<code>getBytes(&quot;GBK&quot;)</code>&#x2F;解码<code>new String(bytes1,&quot;GBK&quot;)</code></p>
 <h4 id="IO流-字节流-字符流"><a href="#IO流-字节流-字符流" class="headerlink" title="IO流-字节流 字符流"></a>IO流-字节流 字符流</h4><p>(抽象类)</p>
-<p>· 文件复制</p>
-<p>字节输入流 InputStream-&gt;FileInputStream<br>字节输出流 OutputStream-&gt;FileOutputStream</p>
-<p>· 读写文本<br>字符输入流 Reader-&gt;FileReader<br>字符输出流 Writer-&gt;FileWriter</p>
+<ul>
+<li><p>文件复制<br>字节输入流 InputStream-&gt;FileInputStream<br>字节输出流 OutputStream-&gt;FileOutputStream</p>
+</li>
+<li><p>读写文本<br>字符输入流 Reader-&gt;FileReader<br>字符输出流 Writer-&gt;FileWriter</p>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">InputStream is=<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>);<span class="comment">//覆盖</span></span><br><span class="line"><span class="comment">//后面加true-&gt;追加</span></span><br><span class="line"><span class="type">int</span> a=is.read();<span class="comment">//读取一个字节</span></span><br><span class="line"><span class="type">byte</span>[] b=<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">3</span>];</span><br><span class="line">String s=<span class="keyword">new</span> <span class="title class_">String</span>(b);</span><br><span class="line"><span class="type">byte</span>[] c=is.readAllBytes();</span><br><span class="line">is.flush();<span class="comment">//刷新流</span></span><br><span class="line">is.close();<span class="comment">//关闭流</span></span><br><span class="line"></span><br><span class="line">OutputStream os=<span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>);</span><br><span class="line">os.write(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"><span class="type">byte</span>[] bytes=<span class="string">&quot;abcd&quot;</span>.getBytes();</span><br><span class="line">os.write(bytes,<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">os.write(<span class="string">&quot;\r\n&quot;</span>.getBytes());</span><br><span class="line">os.close();</span><br></pre></td></tr></table></figure>
 
-<p>· 文件复制 输入流—&gt;输出流</p>
-<h4 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h4><p>· try-catch-finally<br>· try-with-resource</p>
+<ul>
+<li>文件复制 输入流—&gt;输出流</li>
+</ul>
+<h4 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h4><ul>
+<li>try-catch-finally</li>
+<li>try-with-resource</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">OutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;D:\\hexo&quot;</span>))&#123;</span><br><span class="line">     <span class="type">byte</span>[] bytes = <span class="string">&quot;abcd&quot;</span>.getBytes();</span><br><span class="line">     os.write(bytes, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">     os.write(<span class="string">&quot;\r\n&quot;</span>.getBytes());</span><br><span class="line">&#125;<span class="keyword">catch</span>(IOException e)&#123;</span><br><span class="line">     e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="IO流-缓冲流-转换流-打印流-数据流-序列化流"><a href="#IO流-缓冲流-转换流-打印流-数据流-序列化流" class="headerlink" title="IO流-缓冲流 转换流 打印流 数据流 序列化流"></a>IO流-缓冲流 转换流 打印流 数据流 序列化流</h4><p>· 缓冲流 BufferedInputStream &#x2F; BufferedOutputStream &#x2F; BufferedReader<code>br.readLine()</code> &#x2F; BufferedWriter<code>bw.newLine()</code></p>
-<p>包装、提高原始流读写效率</p>
-<p>· 转换流 InputStreamReader &#x2F; OutputStreamWriter</p>
-<p>解决不同字符集乱码问题</p>
-<p>· 打印流 PrintStream<code>ps.println() ps.write()</code> &#x2F; PrintWriter</p>
-<p>高效打印数据</p>
+<h4 id="IO流-缓冲流-转换流-打印流-数据流-序列化流"><a href="#IO流-缓冲流-转换流-打印流-数据流-序列化流" class="headerlink" title="IO流-缓冲流 转换流 打印流 数据流 序列化流"></a>IO流-缓冲流 转换流 打印流 数据流 序列化流</h4><ul>
+<li><p>缓冲流 BufferedInputStream &#x2F; BufferedOutputStream &#x2F; BufferedReader<code>br.readLine()</code> &#x2F; BufferedWriter<code>bw.newLine()</code><br>包装、提高原始流读写效率</p>
+</li>
+<li><p>转换流 InputStreamReader &#x2F; OutputStreamWriter<br>解决不同字符集乱码问题</p>
+</li>
+<li><p>打印流 PrintStream<code>ps.println() ps.write()</code> &#x2F; PrintWriter<br>高效打印数据</p>
+</li>
+</ul>
 <p>重定向<code>System.setOut(ps)</code></p>
-<p>· 数据流 DataInputStream<code>dis.writeUTF()</code> &#x2F; DataOutputStream<code>dos.writeUTF()</code></p>
-<p>传入数据和数据类型</p>
-<p>· 序列化流 ObjectInputStream<code>oos.writeObject()</code> &#x2F; ObjectOutputStream<code>oos.readObject()</code></p>
-<p>序列化接口<code>implements Serializable</code></p>
-<p>成员变量前加上<code>transient</code>不参与序列化</p>
-<p>序列化多个对象： <code>ArrayList</code> 已实现序列化接口</p>
+<ul>
+<li><p>数据流 DataInputStream<code>dis.writeUTF()</code> &#x2F; DataOutputStream<code>dos.writeUTF()</code><br>传入数据和数据类型</p>
+</li>
+<li><p>序列化流 ObjectInputStream<code>oos.writeObject()</code> &#x2F; ObjectOutputStream<code>oos.readObject()</code><br>序列化接口<code>implements Serializable</code><br>成员变量前加上<code>transient</code>不参与序列化<br>序列化多个对象： <code>ArrayList</code> 已实现序列化接口</p>
+</li>
+</ul>
 <h4 id="IO框架"><a href="#IO框架" class="headerlink" title="IO框架"></a>IO框架</h4><p>封装对文件、数据进行操作的代码</p>
 <p>Commons-io 框架</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入框架 融合</span></span><br><span class="line">FileUtils.copyDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\hexo&quot;</span>),<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\CodeField&quot;</span>));<span class="comment">//cpoyFile()</span></span><br><span class="line">FileUtils.deleteDirectory(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\aa&quot;</span>));</span><br></pre></td></tr></table></figure>
@@ -463,12 +477,22 @@
 
 <h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h4 id="创建多线程"><a href="#创建多线程" class="headerlink" title="创建多线程"></a>创建多线程</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.继承Thread</span></span><br><span class="line">Thread t=<span class="keyword">new</span> <span class="title class_">newThread</span>();</span><br><span class="line"><span class="comment">//子类继承Thread 重写run方法</span></span><br><span class="line"><span class="comment">//@Override</span></span><br><span class="line"><span class="comment">//public void run() &#123;</span></span><br><span class="line"><span class="comment">//   System.out.println(&quot;new&quot;);</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">t.start();<span class="comment">//自动执行run</span></span><br><span class="line">System.out.println(<span class="string">&quot;main&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.Runnable接口</span></span><br><span class="line">Runnable t=<span class="keyword">new</span> <span class="title class_">newRunnable</span>();<span class="comment">//子类实现Runnable接口 封装成Thread线程对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(t).start();<span class="comment">//也可以通过匿名内部类 使用Lambda简化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Callable接口 可返回执行结果</span></span><br><span class="line">Callable&lt;Object&gt; ca=<span class="keyword">new</span> <span class="title class_">newCallable</span>(<span class="number">10</span>);</span><br><span class="line">FutureTask&lt;Object&gt; fu=<span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(ca);<span class="comment">//未来任务对象</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Thread</span>(fu).start();</span><br><span class="line">Object ob=fu.get();<span class="comment">//获取结果</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="Thread常用方法"><a href="#Thread常用方法" class="headerlink" title="Thread常用方法"></a>Thread常用方法</h4><p>· run()  start()<br>· currentThread()<br>· getName() setName() &#x2F;&#x2F;构造器直接写<br>· sleep()<br>· join() &#x2F;&#x2F;当前线程先执行完</p>
+<h4 id="Thread常用方法"><a href="#Thread常用方法" class="headerlink" title="Thread常用方法"></a>Thread常用方法</h4><ul>
+<li>run()  start()</li>
+<li>currentThread()</li>
+<li>getName() setName() &#x2F;&#x2F;构造器直接写</li>
+<li>sleep()</li>
+<li>join() &#x2F;&#x2F;当前线程先执行完</li>
+</ul>
 <h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><h5 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h5><p>解决线程安全问题</p>
 <p>加锁</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.同步代码块</span></span><br><span class="line"><span class="keyword">synchronized</span>(<span class="built_in">this</span>)<span class="comment">//共享资源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.同步方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> 返回值 方法名</span><br><span class="line"><span class="comment">//实例方法：this 静态方法：类名.class</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3.Lock锁 采用其实例类ReentrantLock创建对象</span></span><br><span class="line">Lock lk=<span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">lk.lock();</span><br><span class="line">lk.unlock();<span class="comment">//可采用finally</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h5><p>各线程间告知状态<br>· this.wait()<br>· this.notifyAll() </p>
+<h5 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h5><p>各线程间告知状态</p>
+<ul>
+<li>this.wait()</li>
+<li>this.notifyAll()</li>
+</ul>
 <h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>复用线程</p>
 <h5 id="创建线程池-接口ExecutorService"><a href="#创建线程池-接口ExecutorService" class="headerlink" title="创建线程池 接口ExecutorService"></a>创建线程池 接口ExecutorService</h5><p>1.ExecutorService实现类ThreadPoolExecutor</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,BlockingQueue&lt;Runnable&gt; workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)</span></span><br><span class="line">ExecutorService pool=<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,TimeUnit.SECONDS,<span class="keyword">new</span> <span class="title class_">ArrayBlockingQueue</span>&lt;&gt;(<span class="number">3</span>),Executors.defaultThreadFactory(),<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.AbortPolicy());</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理Runnable任务</span></span><br><span class="line">Runnable t=<span class="keyword">new</span> <span class="title class_">newRunnable</span>();</span><br><span class="line">pool.execute(t);</span><br><span class="line">pool.shutdown();</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理Callable任务</span></span><br><span class="line">Future&lt;Object&gt; f=pool.submit(<span class="keyword">new</span> <span class="title class_">newCallable</span>());</span><br></pre></td></tr></table></figure>
@@ -478,7 +502,20 @@
 
 <h4 id="并发-并行-生命周期"><a href="#并发-并行-生命周期" class="headerlink" title="并发 并行 生命周期"></a>并发 并行 生命周期</h4><p>CPU轮询</p>
 <h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>线程安全+同时执行</p>
-<h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4>
+<h3 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h3><p>基本的通信架构 CS&#x2F;BS</p>
+<ul>
+<li><p>IP地址<br>公网&#x2F;局域网&#x2F;特殊IP<br>InetAddress类 <code>InetAddress.getLocalHost(); InetAddress.getByName(); InetAddress.isReachable();</code></p>
+</li>
+<li><p>端口号<br>周知&#x2F;注册&#x2F;动态</p>
+</li>
+<li><p>协议<br>OSI TCP&#x2F;IP<br>传输层：UDP(效率高)&#x2F;TCP(可靠) –&gt;三次握手连接 四次挥手断开</p>
+</li>
+</ul>
+<h4 id="UDP通信"><a href="#UDP通信" class="headerlink" title="UDP通信"></a>UDP通信</h4><p>无连接，不可靠，发送数据包</p>
+<p>DatagramSocket类</p>
+<h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4><p>面向连接，可靠通信，三次握手</p>
+<p>Socket类</p>
+
           
         
       
