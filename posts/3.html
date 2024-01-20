@@ -86,11 +86,13 @@
 <meta property="og:site_name" content="star">
 <meta property="og:description" content="救我 我要洗了">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lxh11111.github.io/image.png">
 <meta property="article:published_time" content="2024-01-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-19T16:23:01.726Z">
+<meta property="article:modified_time" content="2024-01-20T13:05:15.259Z">
 <meta property="article:author" content="lxh11111">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lxh11111.github.io/image.png">
 
 
 
@@ -537,7 +539,96 @@
 </li>
 <li>site</li>
 </ul>
-<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><h4 id="SpringBootWeb"><a href="#SpringBootWeb" class="headerlink" title="SpringBootWeb"></a>SpringBootWeb</h4><h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><h4 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h4>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><h4 id="SpringBootWeb"><a href="#SpringBootWeb" class="headerlink" title="SpringBootWeb"></a>SpringBootWeb</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//端口号8080可能会被占用</span></span><br><span class="line">Application.java--&gt;server.port=<span class="number">8015</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><ul>
+<li>基于TCP协议</li>
+<li>请求-响应模型</li>
+<li>无状态协议–请求间不能共享，但速度快</li>
+</ul>
+<h5 id="请求协议"><a href="#请求协议" class="headerlink" title="请求协议"></a>请求协议</h5><p>请求数据格式</p>
+<ul>
+<li>请求行<ul>
+<li>请求方式 资源路径 协议及版本</li>
+<li>请求方式：</li>
+<li>GET:请求参数在请求行，无请求体，有大小限制</li>
+<li>POST:请求参数在请求体，无大小限制</li>
+</ul>
+</li>
+<li>请求头<ul>
+<li>常见请求头</li>
+<li>Host </li>
+<li>User-Agent 浏览器版本</li>
+<li>Accept 浏览器能接收的资源类型</li>
+<li>Accept-Language </li>
+<li>Accept-Encoding 浏览器支持的压缩类型</li>
+<li>Content-Type 请求主体的数据类型</li>
+<li>Content-Length</li>
+</ul>
+</li>
+<li>请求体</li>
+</ul>
+<h5 id="响应协议"><a href="#响应协议" class="headerlink" title="响应协议"></a>响应协议</h5><p>响应格式</p>
+<ul>
+<li>响应行<ul>
+<li>协议 状态码 描述</li>
+<li>响应状态码：</li>
+<li>1xx 响应中</li>
+<li>2xx 成功</li>
+<li>3xx 重定向</li>
+<li>4xx 客户端错误</li>
+<li>5xx 服务器错误</li>
+<li><img src="/image.png" alt="Alt text"></li>
+</ul>
+</li>
+<li>响应头<ul>
+<li>Content-Type 相应内容类型</li>
+<li>Content-Length</li>
+<li>Content-Encoding 响应压缩算法</li>
+<li>Cache-Control 客户端应如何缓存</li>
+<li>Set-Cookie 所在域设置Cookie</li>
+</ul>
+</li>
+<li>响应体</li>
+</ul>
+<h5 id="协议解析"><a href="#协议解析" class="headerlink" title="协议解析"></a>协议解析</h5><p>繁琐–封装 使用Web服务器</p>
+<h5 id="Tomcat-略"><a href="#Tomcat-略" class="headerlink" title="Tomcat(略)"></a>Tomcat(略)</h5><p>SpringBoot已内嵌依赖</p>
+<h4 id="请求响应"><a href="#请求响应" class="headerlink" title="请求响应"></a>请求响应</h4><h5 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h5><p>接口测试–postman Apipost</p>
+<p>参数</p>
+<ul>
+<li>简单参数<ul>
+<li>SpringBoot接收参数</li>
+<li>名不一致 手动映射--@RequestParam注释(必须传递参数)</li>
+</ul>
+</li>
+<li>实体参数–封装实体类</li>
+<li>数组集合参数<ul>
+<li>如前端传回的checkbox 多个参数</li>
+<li>数组 <code>Array.toString(String[])</code> 默认封装到数组</li>
+<li>集合 <code>@RequestParam List&lt;String&gt;</code></li>
+</ul>
+</li>
+<li>日期参数<ul>
+<li>日期参数格式化<code>@DateTimeFormat(pattern=&quot;yyyy-MM-dd&quot;) LocalDateTime time)</code></li>
+</ul>
+</li>
+<li>JSON参数<ul>
+<li>将其封装为实体类 注解<code>@RequestBody</code></li>
+</ul>
+</li>
+<li>路径参数<ul>
+<li>请求路径参数<code>@RequestMapping(&quot;/path/&#123;id&#125;&quot;)</code></li>
+<li>接收路径参数<code>@PathVariable Integer id</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h5><ul>
+<li><p><code>ResponseBody</code> 方法返回值直接响应(实体类&#x2F;集合–&gt;JSON)<br><code>RestController</code></p>
+</li>
+<li><p>统一响应结果(返回类型)–封装 <code>Result(code,msg,data)</code><br>全部转为JSON格式数据</p>
+</li>
+</ul>
+<h5 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h5><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3>
       
     </div>
     
@@ -567,8 +658,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/2.html" rel="next" title="ALGORITHM">
-                <i class="fa fa-chevron-left"></i> ALGORITHM
+              <a href="/posts/1.html" rel="next" title="BASE">
+                <i class="fa fa-chevron-left"></i> BASE
               </a>
             
           </div>
@@ -707,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">Web前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.</span> <span class="nav-text">前端技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML-CSS"><span class="nav-number">1.1.1.</span> <span class="nav-text">HTML CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSS"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE%E5%92%8C%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">基础标签和样式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">基础标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CSS%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.1.3.2.</span> <span class="nav-text">CSS样式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS"><span class="nav-number">1.1.2.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JS%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">JS对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JS%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">JS事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%BA%A4%E9%A1%B5Ajax"><span class="nav-number">1.2.</span> <span class="nav-text">异步交页Ajax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="nav-number">1.3.</span> <span class="nav-text">前端开发框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue"><span class="nav-number">1.3.1.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">前端工程化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%BA%93Element"><span class="nav-number">1.3.2.</span> <span class="nav-text">组件库Element</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#vue%E8%B7%AF%E7%94%B1"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">vue路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">打包部署</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">Web后端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E2%80%93Maven"><span class="nav-number">2.1.</span> <span class="nav-text">项目构建–Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">依赖配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E4%BC%A0%E9%80%92"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">依赖传递</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">依赖范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-1"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web"><span class="nav-number">2.2.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootWeb"><span class="nav-number">2.2.1.</span> <span class="nav-text">SpringBootWeb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tomcat"><span class="nav-number">2.2.3.</span> <span class="nav-text">Tomcat</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">Web前端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.</span> <span class="nav-text">前端技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML-CSS"><span class="nav-number">1.1.1.</span> <span class="nav-text">HTML CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSS"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE%E5%92%8C%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">基础标签和样式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%87%E7%AD%BE"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">基础标签</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CSS%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.1.3.2.</span> <span class="nav-text">CSS样式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS"><span class="nav-number">1.1.2.</span> <span class="nav-text">JS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JS%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">JS对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JS%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">JS事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%BA%A4%E9%A1%B5Ajax"><span class="nav-number">1.2.</span> <span class="nav-text">异步交页Ajax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6"><span class="nav-number">1.3.</span> <span class="nav-text">前端开发框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue"><span class="nav-number">1.3.1.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">前端工程化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%BA%93Element"><span class="nav-number">1.3.2.</span> <span class="nav-text">组件库Element</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#vue%E8%B7%AF%E7%94%B1"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">vue路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">打包部署</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">Web后端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E2%80%93Maven"><span class="nav-number">2.1.</span> <span class="nav-text">项目构建–Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">2.1.1.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">依赖配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E4%BC%A0%E9%80%92"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">依赖传递</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">依赖范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-1"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web"><span class="nav-number">2.2.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootWeb"><span class="nav-number">2.2.1.</span> <span class="nav-text">SpringBootWeb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">请求协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">响应协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E8%A7%A3%E6%9E%90"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">协议解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tomcat-%E7%95%A5"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">Tomcat(略)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%93%8D%E5%BA%94"><span class="nav-number">2.2.3.</span> <span class="nav-text">请求响应</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%93%8D%E5%BA%94"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">分层解耦</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL"><span class="nav-number">2.3.</span> <span class="nav-text">MySQL</span></a></li></ol></li></ol></div>
             
 
           </div>
