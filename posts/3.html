@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://lxh11111.github.io/image.png">
 <meta property="og:image" content="https://lxh11111.github.io/image-1.png">
 <meta property="article:published_time" content="2024-01-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-23T08:53:43.142Z">
+<meta property="article:modified_time" content="2024-01-23T16:00:28.956Z">
 <meta property="article:author" content="lxh11111">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2024-01-23T16:53:43+08:00">
-                2024-01-23
+              <time title="Post modified" itemprop="dateModified" datetime="2024-01-24T00:00:28+08:00">
+                2024-01-24
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3.2k 字
+                  3.5k 字
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">Reading time ;</span>
                 
                 <span title="Reading time">
-                  13 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -874,7 +874,22 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>mapper namespace<span class="operator">=</span>&quot;com.mapper.usermapper&quot;<span class="operator">&gt;</span></span><br><span class="line">    <span class="operator">&lt;</span><span class="keyword">select</span> id<span class="operator">=</span>&quot;list&quot; resultType<span class="operator">=</span>&quot;com.pojo.user&quot;<span class="operator">&gt;</span></span><br><span class="line">        <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> id <span class="operator">=</span> #&#123;id&#125;</span><br><span class="line">    <span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">select</span><span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>mapper<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>使用注解–完成简单增删改查<br>XML–实现复杂SQL功能</p>
-<h4 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h4>
+<h4 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h4><p>动态查询–多条件查询时可只输入其中几项查询<br>动态更新–更新其中几项(这样不会将其他项更新为null)</p>
+<ul>
+<li><p><code>&lt;if&gt;</code><br>条件成立则拼接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span><span class="keyword">where</span> 需要改成标签<span class="operator">-</span>自动判断需要哪几个条件去掉多余的<span class="keyword">and</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>同理若为动态更新(<span class="keyword">update</span>) 则将<span class="keyword">set</span> 改为标签</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">select</span> id<span class="operator">=</span>&quot;list&quot; resultType<span class="operator">=</span>&quot;com.pojo.emp&quot;<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> emp</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">where</span><span class="operator">&gt;</span></span><br><span class="line">  <span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;id!=null&quot;<span class="operator">&gt;</span></span><br><span class="line">    id <span class="operator">=</span>#&#123;id&#125;</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line">  <span class="operator">&lt;</span>if test<span class="operator">=</span>&quot;user!=null&quot;<span class="operator">&gt;</span></span><br><span class="line">    <span class="keyword">and</span> <span class="keyword">user</span> <span class="keyword">like</span> concat(<span class="string">&#x27;%&#x27;</span>,#&#123;name&#125;,<span class="string">&#x27;%&#x27;</span>)</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>if<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">where</span><span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">select</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>动态删除–批量删除</p>
+<ul>
+<li><p><code>&lt;foreach&gt;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span><span class="keyword">delete</span> id<span class="operator">=</span>&quot;delid&quot;<span class="operator">&gt;</span></span><br><span class="line">  <span class="keyword">delete</span> <span class="keyword">from</span> emp</span><br><span class="line">  <span class="keyword">where</span> id <span class="keyword">in</span></span><br><span class="line">  <span class="operator">&lt;</span>foreach collection<span class="operator">=</span>&quot;idlist&quot; item<span class="operator">=</span>&quot;id&quot; separator<span class="operator">=</span>&quot;,&quot; <span class="keyword">open</span><span class="operator">=</span>&quot;(&quot; <span class="keyword">close</span><span class="operator">=</span>&quot;)&quot;<span class="operator">&gt;</span></span><br><span class="line">    #&#123;id&#125;</span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span>可采用Arrays.asList</span><br><span class="line">  <span class="operator">&lt;</span><span class="operator">/</span>foreach<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">delete</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>查询全部字段时不建议使用<code>select *</code> 而是将所有字段列出来–可能会重复使用</p>
+<ul>
+<li><p><code>&lt;sql&gt;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>单独抽取成片段</span><br><span class="line"><span class="operator">&lt;</span><span class="keyword">sql</span> id<span class="operator">=</span>&quot;commonselect&quot;<span class="operator">&gt;</span></span><br><span class="line">  <span class="keyword">select</span> id,user... <span class="keyword">from</span> emp</span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span><span class="keyword">sql</span><span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>在查询时引入代替原来的<span class="keyword">select</span> ... <span class="keyword">from</span> ...</span><br><span class="line"><span class="operator">&lt;</span>include refid<span class="operator">=</span>&quot;commonselect&quot;<span class="operator">/</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     
@@ -1084,7 +1099,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">10.8k</span>
+    <span title="Site words total count">11.1k</span>
   
 </div>
 
