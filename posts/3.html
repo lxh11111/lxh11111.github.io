@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://lxh11111.github.io/image-2.png">
 <meta property="og:image" content="https://lxh11111.github.io/image-3.png">
 <meta property="article:published_time" content="2024-01-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-30T14:57:31.221Z">
+<meta property="article:modified_time" content="2024-01-30T16:26:48.860Z">
 <meta property="article:author" content="lxh11111">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2024-01-30T22:57:31+08:00">
-                2024-01-30
+              <time title="Post modified" itemprop="dateModified" datetime="2024-01-31T00:26:48+08:00">
+                2024-01-31
               </time>
             
           </span>
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  4.2k 字
+                  4.3k 字
                 </span>
               
 
@@ -991,7 +991,14 @@
 <li>方案一 <code>@ComponentScan</code>扫描</li>
 <li>方案二 <code>@Import</code>导入 采用第三方依赖<code>@Enablexxx</code>注解封装</li>
 </ol>
-<h3 id="Maven其他"><a href="#Maven其他" class="headerlink" title="Maven其他"></a>Maven其他</h3><h4 id="分模块设计和开发"><a href="#分模块设计和开发" class="headerlink" title="分模块设计和开发"></a>分模块设计和开发</h4><h4 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h4><h4 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h4>
+<h3 id="Maven其他"><a href="#Maven其他" class="headerlink" title="Maven其他"></a>Maven其他</h3><h4 id="分模块设计和开发"><a href="#分模块设计和开发" class="headerlink" title="分模块设计和开发"></a>分模块设计和开发</h4><p>将项目拆分为若干模块<br>注意引入依赖</p>
+<h4 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h4><p>解决各个模块依赖配置冗杂 统一管理</p>
+<ul>
+<li>创建parent父工程 打包方式为pom(默认jar) –仅用来配置依赖 <code>&lt;packaging&gt;pom&lt;/packaging&gt;</code></li>
+<li>父工程继承父类spring-boot-starter-parent</li>
+<li>子工程配置关系<code>&lt;parent&gt;&lt;/parent&gt;里面添加&lt;relativePath&gt;../xxparent/pom.xml&lt;/relativePath&gt;</code></li>
+</ul>
+<h4 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h4>
       
     </div>
     
@@ -1201,7 +1208,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">11.8k</span>
+    <span title="Site words total count">11.9k</span>
   
 </div>
 
