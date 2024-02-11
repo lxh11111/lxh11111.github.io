@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git</title>
+    <url>/posts/10004.html</url>
+    <content><![CDATA[<h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><ul>
+<li><a href="https://pic3.zhimg.com/v2-69597b03ba6afc47776a8c580485e586_r.jpg">操作导图</a></li>
+</ul>
+<hr>
+<p><strong>采用图形化工具 tortoiseGit sourcetree vscode IDEA貌似比命令行更简单一点点…emm</strong><br>🤔</p>
+<ul>
+<li><a href="https://juejin.cn/post/6844904191203213326?searchId=20240131232835AD0B7611A99476C949E7#heading-71">Git使用以及很多很多问题</a></li>
+<li><a href="https://blog.csdn.net/qq_37883866/article/details/114375872">IDEA回滚</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaWeb</title>
     <url>/posts/10003.html</url>
     <content><![CDATA[<h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><p>Web标准：</p>
@@ -602,37 +633,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Git</title>
-    <url>/posts/10004.html</url>
-    <content><![CDATA[<h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><ul>
-<li><a href="https://pic3.zhimg.com/v2-69597b03ba6afc47776a8c580485e586_r.jpg">操作导图</a></li>
-</ul>
-<hr>
-<p><strong>采用图形化工具 tortoiseGit sourcetree vscode IDEA貌似比命令行更简单一点点…emm</strong><br>🤔</p>
-<ul>
-<li><a href="https://juejin.cn/post/6844904191203213326?searchId=20240131232835AD0B7611A99476C949E7#heading-71">Git使用以及很多很多问题</a></li>
-<li><a href="https://blog.csdn.net/qq_37883866/article/details/114375872">IDEA回滚</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Learn</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
-      <categories>
-        <category>Test</category>
-      </categories>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BASE</title>
     <url>/posts/10002.html</url>
     <content><![CDATA[<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
@@ -801,7 +801,8 @@
     <url>/posts/10004.html</url>
     <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
 <li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
-<li>想到哪就更哪</li>
+<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
 </ul>
 <hr>
 <p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
@@ -833,7 +834,56 @@
 <p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 <p>可能出现权限问题 前面加上sudo即可</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4>]]></content>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取jredis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那jredis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+]]></content>
       <categories>
         <category>Learn</category>
         <category>Redis</category>
