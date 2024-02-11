@@ -797,11 +797,11 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaWeb</title>
+    <title>关于Redis配置及使用的种种坑</title>
     <url>/posts/10004.html</url>
     <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
 <li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
-<li>想到哪就更</li>
+<li>想到哪就更哪</li>
 </ul>
 <hr>
 <p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
@@ -825,7 +825,7 @@
 <p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
 <h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
 <p>命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.4.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
 
 <h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
