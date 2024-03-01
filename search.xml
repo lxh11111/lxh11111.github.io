@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git</title>
     <url>/posts/10004.html</url>
     <content><![CDATA[<h3 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h3><ul>
@@ -622,64 +633,6 @@
       </tags>
   </entry>
   <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
-      <categories>
-        <category>Test</category>
-      </categories>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL高级</title>
-    <url>/posts/10006.html</url>
-    <content><![CDATA[<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="/image-8.png" alt="alt text"></p>
-<h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
-<li>存储数据、建立索引、更新查询数据的实现方式</li>
-<li>基于表</li>
-<li>默认InnoDB引擎</li>
-<li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
-</ul>
-<h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
-<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="/image-10.png" alt="alt text"></li>
-<li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
-<li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
-</ul>
-<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="/image-11.png" alt="alt text"></p>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
-<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
-<ul>
-<li>B+Tree索引 大部分引擎都支持</li>
-<li>Hash索引 InnoDB不支持</li>
-<li>R-tree 空间索引</li>
-<li>Full-text 全文索引–倒排索引</li>
-</ul>
-<h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><ul>
-<li>二叉树缺点：顺序插入容易形成一个链表，且大数据量下层级很深</li>
-<li>红黑树缺点：本质还是二叉树，大数据量下层级深</li>
-<li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
-<li>B+树 均在叶子节点上，且添加指针</li>
-</ul>
-<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="/image-12.png" alt="alt text"></p>
-<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
-<h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
-<li>主键索引</li>
-<li>唯一索引</li>
-<li>常规索引</li>
-<li>全文索引</li>
-</ul>
-<h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><h4 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h4><h4 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h4>]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BASE</title>
     <url>/posts/10002.html</url>
     <content><![CDATA[<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>updating…<br>是的，如你所见，正在从后往前补，还没补到 :-(</p>
@@ -935,6 +888,101 @@
       <categories>
         <category>Learn</category>
         <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL高级</title>
+    <url>/posts/10006.html</url>
+    <content><![CDATA[<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="/image-8.png" alt="alt text"></p>
+<h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
+<li>存储数据、建立索引、更新查询数据的实现方式</li>
+<li>基于表</li>
+<li>默认InnoDB引擎</li>
+<li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
+</ul>
+<h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
+<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="/image-10.png" alt="alt text"></li>
+<li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
+<li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
+</ul>
+<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="/image-11.png" alt="alt text"></p>
+<h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
+<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
+<ul>
+<li>B+Tree索引 大部分引擎都支持</li>
+<li>Hash索引 InnoDB不支持</li>
+<li>R-tree 空间索引</li>
+<li>Full-text 全文索引–倒排索引</li>
+</ul>
+<h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><ul>
+<li>二叉树缺点：顺序插入容易形成一个链表，且大数据量下层级很深</li>
+<li>红黑树缺点：本质还是二叉树，大数据量下层级深</li>
+<li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
+<li>B+树 均在叶子节点上，且添加指针</li>
+</ul>
+<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="/image-12.png" alt="alt text"></p>
+<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
+<h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
+<li>主键索引</li>
+<li>唯一索引</li>
+<li>常规索引</li>
+<li>全文索引</li>
+</ul>
+<p>InnoDB也可以分为两种</p>
+<ul>
+<li>聚集索引<ul>
+<li>存在主键 主键索引为聚集索引</li>
+<li>不存在主键 第一个唯一索引为聚集索引</li>
+<li>均没有 自动省委rowid作索引</li>
+</ul>
+</li>
+<li>二级索引</li>
+<li>回表查询<br><img src="/image-13.png" alt="alt text"></li>
+</ul>
+<h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
+<li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
+<li>查看索引<br><code>show index from table_name;</code></li>
+<li>删除索引<br><code>drop index index_name on table_name;</code></li>
+</ul>
+<h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><ul>
+<li><p>查看SQL执行频率<br><code>show global status like &#39;Com_______&#39;</code><br>七个下划线<br>查看增删改查的频率–查询频率高要进行sql优化</p>
+</li>
+<li><p>慢查询日志<br>定位sql语句，查看哪一句效率低</p>
+<ul>
+<li>首先在<code>/etc/my.cnf</code>中开启慢查询日志<br><code>slow_query_log=1 #开启</code></li>
+<li><code>long_query_time=2 #设置超过时间</code><br>超时则会在慢查询日志中输出</li>
+<li>慢查询日志在<code>/var/lib/mysql/localhost-slow.log</code>里<br><code>tail -f localhost-slow.log</code>命令可查看慢查询日志尾部信息</li>
+</ul>
+</li>
+<li><p>profile详情</p>
+<ul>
+<li><p>打开开关<br><code>select @@have_profiling;</code><br><code>set profiling=1;</code></p>
+</li>
+<li><p>查看</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query query_id;</span><br><span class="line"><span class="keyword">show</span> profile cpu <span class="keyword">for</span> query query_id;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>explain执行计划</p>
+<ul>
+<li>查询性能<br><code>explain select 字段 from 表...</code></li>
+<li>查询结果字段含义<br><img src="/image-14.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h4 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h4><ul>
+<li>最左前缀法则</li>
+<li>索引失效</li>
+<li>SQL提示</li>
+<li>覆盖索引</li>
+<li>前缀索引</li>
+</ul>
+<h4 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h4>]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>MySQL</category>
       </categories>
       <tags>
         <tag>java</tag>
