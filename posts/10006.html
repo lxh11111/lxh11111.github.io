@@ -28,18 +28,18 @@
 <meta property="og:site_name" content="star⭐">
 <meta property="og:description" content="MySQL索引、SQL优化、存储、视图、锁、引擎等">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lxh11111.github.io/image-8.png">
-<meta property="og:image" content="https://lxh11111.github.io/image-10.png">
-<meta property="og:image" content="https://lxh11111.github.io/image-11.png">
-<meta property="og:image" content="https://lxh11111.github.io/image-12.png">
-<meta property="og:image" content="https://lxh11111.github.io/image-13.png">
-<meta property="og:image" content="https://lxh11111.github.io/image-14.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-8.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-10.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-11.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-12.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-13.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10006.htm/image-14.png">
 <meta property="article:published_time" content="2024-02-29T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-03-01T16:00:24.861Z">
 <meta property="article:author" content="lxh11111">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lxh11111.github.io/image-8.png">
+<meta name="twitter:image" content="https://lxh11111.github.io/posts/10006.htm/image-8.png">
 
 
 <link rel="canonical" href="https://lxh11111.github.io/posts/10006.html">
@@ -284,7 +284,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="/image-8.png" alt="alt text"></p>
+    <div class="post-body" itemprop="articleBody"><h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="/posts/10006.htm/image-8.png" alt="alt text"></p>
 <h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
 <li>存储数据、建立索引、更新查询数据的实现方式</li>
 <li>基于表</li>
@@ -292,11 +292,11 @@
 <li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
 </ul>
 <h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
-<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="/image-10.png" alt="alt text"></li>
+<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="/posts/10006.htm/image-10.png" alt="alt text"></li>
 <li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
 <li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
 </ul>
-<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="/image-11.png" alt="alt text"></p>
+<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="/posts/10006.htm/image-11.png" alt="alt text"></p>
 <h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
 <h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
 <ul>
@@ -311,7 +311,7 @@
 <li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
 <li>B+树 均在叶子节点上，且添加指针</li>
 </ul>
-<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="/image-12.png" alt="alt text"></p>
+<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="/posts/10006.htm/image-12.png" alt="alt text"></p>
 <h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
 <h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
 <li>主键索引</li>
@@ -328,7 +328,7 @@
 </ul>
 </li>
 <li>二级索引</li>
-<li>回表查询<br><img src="/image-13.png" alt="alt text"></li>
+<li>回表查询<br><img src="/posts/10006.htm/image-13.png" alt="alt text"></li>
 </ul>
 <h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
 <li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
@@ -356,7 +356,7 @@
 <li><p>explain执行计划</p>
 <ul>
 <li>查询性能<br><code>explain select 字段 from 表...</code></li>
-<li>查询结果字段含义<br><img src="/image-14.png" alt="alt text"></li>
+<li>查询结果字段含义<br><img src="/posts/10006.htm/image-14.png" alt="alt text"></li>
 </ul>
 </li>
 </ul>

@@ -28,13 +28,13 @@
 <meta property="og:site_name" content="star⭐">
 <meta property="og:description" content="不想再补了啊啊啊！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lxh11111.github.io/image-1.png">
+<meta property="og:image" content="https://lxh11111.github.io/posts/10002.htm/image-1.png">
 <meta property="article:published_time" content="2024-01-10T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-02-10T03:42:31.850Z">
 <meta property="article:author" content="lxh11111">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lxh11111.github.io/image-1.png">
+<meta name="twitter:image" content="https://lxh11111.github.io/posts/10002.htm/image-1.png">
 
 
 <link rel="canonical" href="https://lxh11111.github.io/posts/10002.html">
@@ -285,7 +285,7 @@
 <h4 id="一些静态方法"><a href="#一些静态方法" class="headerlink" title="一些静态方法"></a>一些静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Objects.equals(s1,s2);<span class="comment">//相比字符串的equals方法（注意空指针异常），先进行非空判断</span></span><br><span class="line">Objects.isNull(s1);<span class="comment">//s1==null</span></span><br><span class="line">Objects.nonNull(s1);</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>把基本数据类型包装成对象<br><img src="/image-1.png" alt="Alt text"></p>
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><p>把基本数据类型包装成对象<br><img src="/posts/10002.htm/image-1.png" alt="Alt text"></p>
 <h4 id="一些静态方法-用于泛型和集合（引用数据类型）"><a href="#一些静态方法-用于泛型和集合（引用数据类型）" class="headerlink" title="一些静态方法(用于泛型和集合（引用数据类型）)"></a>一些静态方法(用于泛型和集合（引用数据类型）)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应用于泛型和集合</span></span><br><span class="line">ArrayList&lt;Integer&gt; list=<span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换成字符串</span></span><br><span class="line">String s1=Integer.toString(a);</span><br><span class="line">String s1=a.toString();<span class="comment">//继承Objects类toString()方法</span></span><br><span class="line">String s1=a+<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串类型的数值转换成对应</span></span><br><span class="line"><span class="type">int</span> a=Integer.parseInt(s1);<span class="comment">//注意转换类型</span></span><br><span class="line"><span class="type">int</span> a=Integer.valueOf(s1);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
