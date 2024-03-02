@@ -722,14 +722,14 @@
 <li>索引失效<ul>
 <li>在索引列上计算，会导致索引失效</li>
 <li>字符串类型字段使用查询不加引号，会导致索引失效</li>
-<li>尾部模糊匹配索引不失效，头部模糊匹配索引失效</li>
-<li>or连接：如果or前的列有索引但后面的列没有，所涉及的索引均失效。两侧均有索引才会有效</li>
+<li>尾部模糊匹配索引不失效，<strong>头部模糊匹配</strong>索引失效</li>
+<li>or连接：如果or前的列有索引但后面的列没有，所涉及的索引均失效。<strong>两侧均有索引</strong>才会有效</li>
 <li>数据分布情况：如果评估全表扫描比索引效率高，则不使用索引</li>
 </ul>
 </li>
 <li>SQL提示<ul>
 <li>加入人为的提示来优化，在from 表名后指定<br><code>use index</code> 使用某个索引<br><code>ignore index</code>  不使用某个索引<br><code>force index</code>  强制使用某个索引</li>
-<li>use只是建议mysql使用该索引，最终使用哪个取决于mysql的判断</li>
+<li>use只是建议mysql使用该索引，最终使用哪个<strong>取决于mysql的判断</strong></li>
 </ul>
 </li>
 <li>覆盖索引<ul>
@@ -740,12 +740,12 @@
 <li>前缀索引<ul>
 <li>字段类型为字符串或大文本时需要索引很长的字符串–只将一部分前缀建立索引</li>
 <li><code>create index idx_xxx on table table_name(column(n));</code>n为截取前缀长度</li>
-<li>长度的选择：根据不重复的索引值与数据表总记录数的比值(选择性)决定</li>
+<li>长度的选择：根据不重复的索引值与数据表总记录数的<strong>比值</strong>(选择性)决定</li>
 </ul>
 </li>
 <li>联合索引<ul>
 <li>如果有多个查询条件，考虑根据查询字段尽力联合索引，避免回表查询</li>
-<li>创建联合索引要考虑字段顺序–参考最左前缀法则</li>
+<li>创建联合索引要<strong>考虑字段顺序</strong>–参考最左前缀法则</li>
 </ul>
 </li>
 </ul>
@@ -756,7 +756,7 @@
 </ul>
 <h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><p>插入多条数据优化</p>
 <ul>
-<li><p>批量插入<br>大批量数据采用insert插入性能低，可以采用mysql提供的load指令插入</p>
+<li><p>批量插入<br>大批量数据采用insert插入性能低，可以采用mysql提供的<strong>load指令</strong>插入</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 客户端连接服务端时，加上参数 -–local-infile</span></span><br><span class="line">mysql –<span class="operator">-</span><span class="keyword">local</span><span class="operator">-</span>infile <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="comment">-- 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> local_infile <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="comment">-- 执行load指令将准备好的数据，加载到表结构中</span></span><br><span class="line">load data <span class="keyword">local</span> infile <span class="string">&#x27;/root/sql1.log&#x27;</span> <span class="keyword">into</span> <span class="keyword">table</span> tb_user fields</span><br><span class="line">terminated <span class="keyword">by</span> <span class="string">&#x27;,&#x27;</span> lines terminated <span class="keyword">by</span> <span class="string">&#x27;\n&#x27;</span> ;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>手动事务提交</p>
@@ -767,15 +767,77 @@
 </ul>
 <h4 id="主键优化"><a href="#主键优化" class="headerlink" title="主键优化"></a>主键优化</h4><ul>
 <li>InnoDB中表数据是根据主键顺序存放的</li>
-<li>页分裂，页合并：主键乱序插入时可能会造成页分裂，删除可能会造成页合并</li>
+<li><strong>页分裂，页合并</strong>：主键乱序插入时可能会造成页分裂，删除可能会造成页合并</li>
 <li>主键设计原则<ul>
 <li>尽量降低主键长度</li>
-<li>尽量顺序插入</li>
+<li>尽量<strong>顺序插入</strong></li>
 <li>尽量不使用UUID或自然主键如身份证号作主键</li>
 </ul>
 </li>
 </ul>
-<h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><h4 id="group-by优化"><a href="#group-by优化" class="headerlink" title="group by优化"></a>group by优化</h4><h4 id="limit优化"><a href="#limit优化" class="headerlink" title="limit优化"></a>limit优化</h4><h4 id="count优化"><a href="#count优化" class="headerlink" title="count优化"></a>count优化</h4><h4 id="update优化"><a href="#update优化" class="headerlink" title="update优化"></a>update优化</h4>]]></content>
+<h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><ul>
+<li>extra字段<ul>
+<li>using filesort<br>通过表的索引或全表扫描，在排序缓冲区完成排序</li>
+<li>using index<br>通过有序索引扫描直接返回，不需要额外排序<br>前提：使用覆盖索引</li>
+</ul>
+</li>
+<li>优化<ul>
+<li>尽量使用<strong>有序索引</strong>扫描，且<strong>使用覆盖索引</strong></li>
+<li>使用不了有序索引–大数据情况下，可以增大排序缓冲区大小</li>
+</ul>
+</li>
+</ul>
+<h4 id="group-by优化"><a href="#group-by优化" class="headerlink" title="group by优化"></a>group by优化</h4><ul>
+<li>优化<br>建立适当索引提高分组效率(联合索引)<br>满足最左前缀法则</li>
+</ul>
+<h4 id="limit优化"><a href="#limit优化" class="headerlink" title="limit优化"></a>limit优化</h4><ul>
+<li>优化<ul>
+<li>数据量大的情况下，使用limit分页查询很慢，使用orderby排序查询后再查询，降低查询时间</li>
+<li>创建<strong>覆盖索引+子查询</strong><br><code>select * from tb1 a,(select id from tb2 order by limit 10000000,10) b where a.id=b.id;</code><br>说明：直接进行子查询，包含了limit字段会报错，所以采用多表查询，将子查询得到的结果视为一张表，进行多表查询</li>
+</ul>
+</li>
+</ul>
+<h4 id="count优化"><a href="#count优化" class="headerlink" title="count优化"></a>count优化</h4><ul>
+<li>count()字段说明<br><img src="https://pic.imgdb.cn/item/65e349e99f345e8d03863358.jpg" alt="alt text"></li>
+<li>优化<br>效率：字段&lt;主键&lt;1≈*(不需要取值则效率高)<br>尽量使用<code>count(*)</code></li>
+</ul>
+<h4 id="update优化"><a href="#update优化" class="headerlink" title="update优化"></a>update优化</h4><ul>
+<li>优化<ul>
+<li>根据索引字段更新</li>
+<li>InnoDB行锁针对索引加锁，如果索引失效或不使用该索引，就会从行锁升级为表锁，并发性能降低</li>
+</ul>
+</li>
+</ul>
+<h3 id="视图-存储过程-触发器"><a href="#视图-存储过程-触发器" class="headerlink" title="视图&#x2F;存储过程&#x2F;触发器"></a>视图&#x2F;存储过程&#x2F;触发器</h3><h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><ul>
+<li>一种虚拟存在的表，不存储数据，保存sql语句，数据均在基表中</li>
+<li>语法<ul>
+<li>创建<br><code>CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [CASCADED | LOCAL ] CHECK OPTION ] </code></li>
+<li>查询<br><code>查看创建视图语句：SHOW CREATE VIEW 视图名称; 查看视图数据：SELECT * FROM 视图名称 ...... ;</code></li>
+<li>修改<br><code> 方式一：CREATE [OR REPLACE] VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [ CASCADED | LOCAL ] CHECK OPTION ]</code><br><code>方式二：ALTER VIEW 视图名称[(列名列表)] AS SELECT语句 [ WITH [ CASCADED |LOCAL ] CHECK OPTION ] </code></li>
+<li>删除<br><code>DROP VIEW [IF EXISTS] 视图名称 [,视图名称] ..</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="检查选项"><a href="#检查选项" class="headerlink" title="检查选项"></a>检查选项</h5><ul>
+<li>使用<code>with check option</code>创建视图，mysql通过视图检查每个更改行，使其符合视图定义</li>
+<li>允许基于一个视图创建另一个，检查<strong>依赖视图</strong>中的规则保持一致性</li>
+<li>检查范围<ul>
+<li>cascaded(默认)<br>检查当前视图和其依赖的视图<br><img src="https://pic.imgdb.cn/item/65e352589f345e8d03a8cb53.jpg" alt="alt text"></li>
+<li>local<br>若依赖视图无条件检查，则不检查<br><img src="https://pic.imgdb.cn/item/65e353469f345e8d03ac091a.jpg" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h5 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h5><ul>
+<li>更新视图条件：<br>视图行与基础表行必须<strong>存在一对一的关系</strong></li>
+<li>包含以下则视图不可更新：<br>聚合&#x2F;窗口函数、distinct、group by、having、union</li>
+<li>作用<ul>
+<li>简单 简化操作与理解</li>
+<li>安全 只查询修改所见到的数据</li>
+<li>数据独立 屏蔽真实表结构变化带来的影响</li>
+</ul>
+</li>
+</ul>
+<h4 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h4><h4 id="存储函数"><a href="#存储函数" class="headerlink" title="存储函数"></a>存储函数</h4><h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4>]]></content>
       <categories>
         <category>Learn</category>
         <category>MySQL</category>
