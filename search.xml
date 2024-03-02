@@ -21,17 +21,6 @@
       </tags>
   </entry>
   <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
-      <categories>
-        <category>Test</category>
-      </categories>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySQL高级</title>
     <url>/posts/10006.html</url>
     <content><![CDATA[<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="https://pic.imgdb.cn/item/65e201839f345e8d03418034.png" alt="alt text"></p>
@@ -42,11 +31,11 @@
 <li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
 </ul>
 <h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
-<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="/posts/10006.htm/image-10.png" alt="alt text"></li>
+<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="https://pic.imgdb.cn/item/65e2e23d9f345e8d03ffa8e3.png" alt="alt text"></li>
 <li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
 <li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
 </ul>
-<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="/posts/10006.htm/image-11.png" alt="alt text"></p>
+<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="https://pic.imgdb.cn/item/65e2e2409f345e8d03ffb27f.png" alt="alt text"></p>
 <h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
 <h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
 <ul>
@@ -61,7 +50,7 @@
 <li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
 <li>B+树 均在叶子节点上，且添加指针</li>
 </ul>
-<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="/posts/10006.htm/image-12.png" alt="alt text"></p>
+<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="https://pic.imgdb.cn/item/65e2e2449f345e8d03ffbd0e.png" alt="alt text"></p>
 <h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
 <h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
 <li>主键索引</li>
@@ -78,7 +67,7 @@
 </ul>
 </li>
 <li>二级索引</li>
-<li>回表查询<br><img src="/posts/10006.htm/image-13.png" alt="alt text"></li>
+<li>回表查询<br><img src="https://pic.imgdb.cn/item/65e2e2499f345e8d03ffc98d.png" alt="alt text"></li>
 </ul>
 <h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
 <li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
@@ -106,7 +95,7 @@
 <li><p>explain执行计划</p>
 <ul>
 <li>查询性能<br><code>explain select 字段 from 表...</code></li>
-<li>查询结果字段含义<br><img src="/posts/10006.htm/image-14.png" alt="alt text"></li>
+<li>查询结果字段含义<br><img src="https://pic.imgdb.cn/item/65e2e24c9f345e8d03ffd43c.png" alt="alt text"></li>
 </ul>
 </li>
 </ul>
@@ -124,6 +113,17 @@
       </categories>
       <tags>
         <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
       </tags>
   </entry>
   <entry>
@@ -339,7 +339,7 @@
 <li>3xx 重定向</li>
 <li>4xx 客户端错误</li>
 <li>5xx 服务器错误</li>
-<li><img src="/posts/10003.htm/image.png" alt="Alt text"></li>
+<li><img src="https://pic.imgdb.cn/item/65e2e3f79f345e8d03046d5b.png" alt="Alt text"></li>
 </ul>
 </li>
 <li>响应头<ul>
@@ -617,7 +617,7 @@
 <li>执行流程</li>
 <li>拦截路径</li>
 <li>过滤器链 多个过滤器</li>
-<li><img src="/posts/10003.htm/image-2.png" alt="Alt text"></li>
+<li><img src="https://pic.imgdb.cn/item/65e2e3ab9f345e8d03038d0a.png" alt="Alt text"></li>
 </ul>
 </li>
 <li>Interceptor(Spring)<ul>
@@ -627,7 +627,7 @@
 <li>&#x2F;** 拦截任意级路径</li>
 </ul>
 </li>
-<li>执行流程<br><img src="/posts/10003.htm/image-3.png" alt="Alt text"></li>
+<li>执行流程<br><img src="https://pic.imgdb.cn/item/65e2e3c79f345e8d0303e22b.png" alt="Alt text"></li>
 </ul>
 </li>
 </ul>
@@ -722,103 +722,6 @@
 ]]></content>
       <categories>
         <category>Learn</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Redis配置及使用的种种坑</title>
-    <url>/posts/10005.html</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
-<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
-<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
-<li>如有错误欢迎指正</li>
-</ul>
-<hr>
-<p><strong>后续</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
-<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
-<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
-<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
-</li>
-<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
-</li>
-<li><p><strong>Ubuntu</strong></p>
-<ol>
-<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
-<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
-<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
-<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
-<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
-</ol>
-</li>
-</ol>
-<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
-<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
-<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
-<p>命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>可能出现权限问题 前面加上sudo即可</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
-<ul>
-<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
-<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
-</ul>
-<p>可能出现</p>
-<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
-<p>主要以下四条：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
-<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
-<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
-</ul>
-<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
-<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
-<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
-<p>常用指令</p>
-<ul>
-<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
-<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
-<li><code>-a 666</code>：指定redis的访问密码</li>
-</ul>
-<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
-<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
-<p>很好安 然后点击连接到redis服务器</p>
-<p><strong>！！！报错：连接不上</strong></p>
-<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
-<p>查阅了各大佬的解决方案，操作如下</p>
-<ul>
-<li>查看虚拟机ip <code>ifconfig</code></li>
-<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
-<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
-<li>检查redis.conf配置文件  –没啥毛病</li>
-<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
-<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
-<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
-</ul>
-</li>
-<li>检查windows防火墙入站规则</li>
-<li>重新加载redis</li>
-<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
-</ul>
-<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
-<p><strong>成功啦！</strong></p>
-<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
-<p>test成功</p>
-<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
-]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>Redis</category>
       </categories>
       <tags>
         <tag>java</tag>
@@ -983,6 +886,103 @@
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4>]]></content>
       <categories>
         <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Redis配置及使用的种种坑</title>
+    <url>/posts/10005.html</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
+<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
+<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
+</ul>
+<hr>
+<p><strong>后续</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
+<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
+<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
+</li>
+<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
+</li>
+<li><p><strong>Ubuntu</strong></p>
+<ol>
+<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
+<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
+<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
+<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
+<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
+</ol>
+</li>
+</ol>
+<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
+<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
+<p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可能出现权限问题 前面加上sudo即可</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>Redis</category>
       </categories>
       <tags>
         <tag>java</tag>
