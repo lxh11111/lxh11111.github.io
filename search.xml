@@ -21,112 +21,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL高级</title>
-    <url>/posts/10006.html</url>
-    <content><![CDATA[<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="https://pic.imgdb.cn/item/65e201839f345e8d03418034.png" alt="alt text"></p>
-<h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
-<li>存储数据、建立索引、更新查询数据的实现方式</li>
-<li>基于表</li>
-<li>默认InnoDB引擎</li>
-<li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
-</ul>
-<h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
-<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="https://pic.imgdb.cn/item/65e2e23d9f345e8d03ffa8e3.png" alt="alt text"></li>
-<li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
-<li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
-</ul>
-<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="https://pic.imgdb.cn/item/65e2e2409f345e8d03ffb27f.png" alt="alt text"></p>
-<h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
-<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
-<ul>
-<li>B+Tree索引 大部分引擎都支持</li>
-<li>Hash索引 InnoDB不支持</li>
-<li>R-tree 空间索引</li>
-<li>Full-text 全文索引–倒排索引</li>
-</ul>
-<h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><ul>
-<li>二叉树缺点：顺序插入容易形成一个链表，且大数据量下层级很深</li>
-<li>红黑树缺点：本质还是二叉树，大数据量下层级深</li>
-<li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
-<li>B+树 均在叶子节点上，且添加指针</li>
-</ul>
-<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="https://pic.imgdb.cn/item/65e2e2449f345e8d03ffbd0e.png" alt="alt text"></p>
-<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
-<h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
-<li>主键索引</li>
-<li>唯一索引</li>
-<li>常规索引</li>
-<li>全文索引</li>
-</ul>
-<p>InnoDB也可以分为两种</p>
-<ul>
-<li>聚集索引<ul>
-<li>存在主键 主键索引为聚集索引</li>
-<li>不存在主键 第一个唯一索引为聚集索引</li>
-<li>均没有 自动省委rowid作索引</li>
-</ul>
-</li>
-<li>二级索引</li>
-<li>回表查询<br><img src="https://pic.imgdb.cn/item/65e2e2499f345e8d03ffc98d.png" alt="alt text"></li>
-</ul>
-<h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
-<li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
-<li>查看索引<br><code>show index from table_name;</code></li>
-<li>删除索引<br><code>drop index index_name on table_name;</code></li>
-</ul>
-<h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><ul>
-<li><p>查看SQL执行频率<br><code>show global status like &#39;Com_______&#39;</code><br>七个下划线<br>查看增删改查的频率–查询频率高要进行sql优化</p>
-</li>
-<li><p>慢查询日志<br>定位sql语句，查看哪一句效率低</p>
-<ul>
-<li>首先在<code>/etc/my.cnf</code>中开启慢查询日志<br><code>slow_query_log=1 #开启</code></li>
-<li><code>long_query_time=2 #设置超过时间</code><br>超时则会在慢查询日志中输出</li>
-<li>慢查询日志在<code>/var/lib/mysql/localhost-slow.log</code>里<br><code>tail -f localhost-slow.log</code>命令可查看慢查询日志尾部信息</li>
-</ul>
-</li>
-<li><p>profile详情</p>
-<ul>
-<li><p>打开开关<br><code>select @@have_profiling;</code><br><code>set profiling=1;</code></p>
-</li>
-<li><p>查看</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query query_id;</span><br><span class="line"><span class="keyword">show</span> profile cpu <span class="keyword">for</span> query query_id;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>explain执行计划</p>
-<ul>
-<li>查询性能<br><code>explain select 字段 from 表...</code></li>
-<li>查询结果字段含义<br><img src="https://pic.imgdb.cn/item/65e2e24c9f345e8d03ffd43c.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<h4 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h4><ul>
-<li>最左前缀法则</li>
-<li>索引失效</li>
-<li>SQL提示</li>
-<li>覆盖索引</li>
-<li>前缀索引</li>
-</ul>
-<h4 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h4>]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>My New Post</title>
-    <url>/posts/10001.html</url>
-    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
-      <categories>
-        <category>Test</category>
-      </categories>
-      <tags>
-        <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaWeb</title>
     <url>/posts/10003.html</url>
     <content><![CDATA[<h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><h3 id="前端技术"><a href="#前端技术" class="headerlink" title="前端技术"></a>前端技术</h3><p>Web标准：</p>
@@ -722,6 +616,169 @@
 ]]></content>
       <categories>
         <category>Learn</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>My New Post</title>
+    <url>/posts/10001.html</url>
+    <content><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2>]]></content>
+      <categories>
+        <category>Test</category>
+      </categories>
+      <tags>
+        <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL高级</title>
+    <url>/posts/10006.html</url>
+    <content><![CDATA[<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><h4 id="MySQl体系结构"><a href="#MySQl体系结构" class="headerlink" title="MySQl体系结构"></a>MySQl体系结构</h4><p><img src="https://pic.imgdb.cn/item/65e201839f345e8d03418034.png" alt="alt text"></p>
+<h4 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h4><ul>
+<li>存储数据、建立索引、更新查询数据的实现方式</li>
+<li>基于<strong>表</strong></li>
+<li>默认<strong>InnoDB引擎</strong></li>
+<li>创建表的时候指定引擎<code>engine=InnoDB</code></li>
+</ul>
+<h4 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h4><ul>
+<li>InnoDB<br>支持事务、行级锁、外键<br>逻辑存储结构：<img src="https://pic.imgdb.cn/item/65e326f39f345e8d03e11cc0.jpg" alt="alt text"></li>
+<li>MyISAM<br>支持表锁，不支持行锁、事务、外键</li>
+<li>Memory<br>存储在内存中，只能作为临时表或缓存<br>hash索引</li>
+</ul>
+<h4 id="存储引擎选择"><a href="#存储引擎选择" class="headerlink" title="存储引擎选择"></a>存储引擎选择</h4><p><img src="https://pic.imgdb.cn/item/65e2e2409f345e8d03ffb27f.png" alt="alt text"></p>
+<h4 id="Linux下安装MySQL"><a href="#Linux下安装MySQL" class="headerlink" title="Linux下安装MySQL"></a>Linux下安装MySQL</h4><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h4><p>高效获取数据的数据结构</p>
+<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><p>不同的存储引擎有不同的索引结构</p>
+<ul>
+<li>B+Tree索引 大部分引擎都支持</li>
+<li>Hash索引 InnoDB不支持</li>
+<li>R-tree 空间索引</li>
+<li>Full-text 全文索引–倒排索引</li>
+</ul>
+<h5 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h5><ul>
+<li>二叉树缺点：顺序插入容易<strong>形成一个链表，且大数据量下层级很深</strong></li>
+<li>红黑树缺点：本质还是二叉树，<strong>大数据量下层级深</strong></li>
+<li>B树(多路平衡查找树)缺点：叶子节点和非叶子节点均储存数据，导致一页中存储的键值减少，增加树高度</li>
+<li>B+树 均在<strong>叶子节点</strong>上，且添加双向指针</li>
+</ul>
+<p><strong>MySQL里的B+树</strong><br>增加了优化<br><img src="https://pic.imgdb.cn/item/65e326ab9f345e8d03dfc3b6.jpg" alt="alt text"></p>
+<h5 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h5><p>通过hash算法计算值映射<br>InnoDB不支持hash索引，但有自适应功能，指定条件下根据B+索引自动创建<br><strong>只支持等值匹配，不支持范围匹配及排序</strong>–所以选择B+树索引</p>
+<h4 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h4><ul>
+<li>主键索引</li>
+<li>唯一索引</li>
+<li>常规索引</li>
+<li>全文索引</li>
+</ul>
+<p>InnoDB也可以分为两种</p>
+<ul>
+<li>聚集索引<ul>
+<li>存在主键 <strong>主键索引</strong>为聚集索引</li>
+<li>不存在主键 第一个唯一索引为聚集索引</li>
+<li>均没有 自动生成rowid作索引</li>
+</ul>
+</li>
+<li>二级索引</li>
+<li>回表查询<br><img src="https://pic.imgdb.cn/item/65e2e2499f345e8d03ffc98d.png" alt="alt text"></li>
+</ul>
+<h4 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h4><ul>
+<li>创建索引<br><code>create [unique|fulltext] index index_name on table_name (index_col_name,...);</code></li>
+<li>查看索引<br><code>show index from table_name;</code></li>
+<li>删除索引<br><code>drop index index_name on table_name;</code></li>
+</ul>
+<h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><ul>
+<li><p>查看SQL执行频率<br><code>show global status like &#39;Com_______&#39;</code><br>七个下划线<br>查看增删改查的频率–查询频率高要进行sql优化</p>
+</li>
+<li><p>慢查询日志</p>
+<ul>
+<li>定位sql语句，查看哪一句效率低</li>
+<li>首先在<code>/etc/my.cnf</code>中开启慢查询日志<br><code>slow_query_log=1 #开启</code></li>
+<li><code>long_query_time=2 #设置超过时间</code><br>超时则会在慢查询日志中输出</li>
+<li>慢查询日志在<code>/var/lib/mysql/localhost-slow.log</code>里<br><code>tail -f localhost-slow.log</code>命令可查看慢查询日志尾部信息</li>
+</ul>
+</li>
+<li><p>profile详情</p>
+<ul>
+<li><p>打开开关<br><code>select @@have_profiling;</code><br><code>set profiling=1;</code></p>
+</li>
+<li><p>查看</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query query_id;</span><br><span class="line"><span class="keyword">show</span> profile cpu <span class="keyword">for</span> query query_id;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>explain执行计划</p>
+<ul>
+<li>查询性能<br><code>explain select 字段 from 表...</code></li>
+<li>查询结果字段含义<br><img src="https://pic.imgdb.cn/item/65e2e24c9f345e8d03ffd43c.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h4 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h4><ul>
+<li>最左前缀法则<ul>
+<li>联合索引遵守最左前缀法则，从最左列开始且不跳过索引中的列，<strong>跳过的话后面的字段索引会失效</strong></li>
+<li>最左索引存在即可，与后面字段位置顺序无关</li>
+<li>联合索引如果出现范围查询(&gt;,&lt;)，范围查询右侧的索引失效–<strong>规避：尽量采用大于等于或小于等于</strong></li>
+</ul>
+</li>
+<li>索引失效<ul>
+<li>在索引列上计算，会导致索引失效</li>
+<li>字符串类型字段使用查询不加引号，会导致索引失效</li>
+<li>尾部模糊匹配索引不失效，头部模糊匹配索引失效</li>
+<li>or连接：如果or前的列有索引但后面的列没有，所涉及的索引均失效。两侧均有索引才会有效</li>
+<li>数据分布情况：如果评估全表扫描比索引效率高，则不使用索引</li>
+</ul>
+</li>
+<li>SQL提示<ul>
+<li>加入人为的提示来优化，在from 表名后指定<br><code>use index</code> 使用某个索引<br><code>ignore index</code>  不使用某个索引<br><code>force index</code>  强制使用某个索引</li>
+<li>use只是建议mysql使用该索引，最终使用哪个取决于mysql的判断</li>
+</ul>
+</li>
+<li>覆盖索引<ul>
+<li>尽量不写<code>select *</code>，容易产生回表查询(二级索引没覆盖到需要查询的字段，需要根据返回的id回查聚集索引)，性能低</li>
+<li>查询性能extra字段：<br><img src="https://pic.imgdb.cn/item/65e312039f345e8d038bf803.png" alt="alt text"></li>
+</ul>
+</li>
+<li>前缀索引<ul>
+<li>字段类型为字符串或大文本时需要索引很长的字符串–只将一部分前缀建立索引</li>
+<li><code>create index idx_xxx on table table_name(column(n));</code>n为截取前缀长度</li>
+<li>长度的选择：根据不重复的索引值与数据表总记录数的比值(选择性)决定</li>
+</ul>
+</li>
+<li>联合索引<ul>
+<li>如果有多个查询条件，考虑根据查询字段尽力联合索引，避免回表查询</li>
+<li>创建联合索引要考虑字段顺序–参考最左前缀法则</li>
+</ul>
+</li>
+</ul>
+<h4 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h4><ul>
+<li><img src="https://pic.imgdb.cn/item/65e321d79f345e8d03c9457e.jpg" alt="alt text"></li>
+<li><img src="https://pic.imgdb.cn/item/65e322199f345e8d03ca4c62.jpg" alt="alt text"></li>
+<li><img src="https://pic.imgdb.cn/item/65e3223c9f345e8d03cad74d.jpg" alt="alt text"></li>
+</ul>
+<h3 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h3><h4 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h4><p>插入多条数据优化</p>
+<ul>
+<li><p>批量插入<br>大批量数据采用insert插入性能低，可以采用mysql提供的load指令插入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 客户端连接服务端时，加上参数 -–local-infile</span></span><br><span class="line">mysql –<span class="operator">-</span><span class="keyword">local</span><span class="operator">-</span>infile <span class="operator">-</span>u root <span class="operator">-</span>p</span><br><span class="line"><span class="comment">-- 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> local_infile <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="comment">-- 执行load指令将准备好的数据，加载到表结构中</span></span><br><span class="line">load data <span class="keyword">local</span> infile <span class="string">&#x27;/root/sql1.log&#x27;</span> <span class="keyword">into</span> <span class="keyword">table</span> tb_user fields</span><br><span class="line">terminated <span class="keyword">by</span> <span class="string">&#x27;,&#x27;</span> lines terminated <span class="keyword">by</span> <span class="string">&#x27;\n&#x27;</span> ;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动事务提交</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">start</span> transaction;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span>... values...;</span><br><span class="line">insert...;</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主键顺序插入</p>
+</li>
+</ul>
+<h4 id="主键优化"><a href="#主键优化" class="headerlink" title="主键优化"></a>主键优化</h4><ul>
+<li>InnoDB中表数据是根据主键顺序存放的</li>
+<li>页分裂，页合并：主键乱序插入时可能会造成页分裂，删除可能会造成页合并</li>
+<li>主键设计原则<ul>
+<li>尽量降低主键长度</li>
+<li>尽量顺序插入</li>
+<li>尽量不使用UUID或自然主键如身份证号作主键</li>
+</ul>
+</li>
+</ul>
+<h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><h4 id="group-by优化"><a href="#group-by优化" class="headerlink" title="group by优化"></a>group by优化</h4><h4 id="limit优化"><a href="#limit优化" class="headerlink" title="limit优化"></a>limit优化</h4><h4 id="count优化"><a href="#count优化" class="headerlink" title="count优化"></a>count优化</h4><h4 id="update优化"><a href="#update优化" class="headerlink" title="update优化"></a>update优化</h4>]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>MySQL</category>
       </categories>
       <tags>
         <tag>java</tag>
