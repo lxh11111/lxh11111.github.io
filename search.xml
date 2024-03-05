@@ -836,7 +836,7 @@
 <li><p>创建</p>
 <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> name(参数)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="operator">-</span><span class="keyword">sql</span>语句</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>注意：在命令行中执行上述语句会报错，因为执行到sql语句分号时视为语句结束，并没有识别到end后的分号<br><strong>解决</strong>：使用<code>delimiter $$</code>设置结束符号(这里设置为$$)，这样将end后的分号改为$$，就可以执行整个创建语句，注意结束后记得将结束符号改回<code>;</code></p>
+<li><p>注意：在命令行中执行上述语句会报错，因为执行到sql语句分号时视为语句结束，并没有识别到end后的分号<br><strong>解决</strong>：使用<code>delimiter $$</code>设置结束符号(这里设置为<code>$$</code>)，这样将end后的分号改为$$，就可以执行整个创建语句，注意结束后记得将结束符号改回<code>;</code></p>
 </li>
 <li><p>调用<br><code>call name(参数);</code></p>
 </li>
@@ -1065,7 +1065,90 @@
 <li>索引上的范围查询(唯一索引)–会访问到不满足条件的第一个值为止</li>
 </ul>
 <p>注意：间隙锁唯一目的是<strong>防止其他事务插入间隙</strong>。间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上采用间隙锁。</p>
-<h3 id="InnoDB引擎"><a href="#InnoDB引擎" class="headerlink" title="InnoDB引擎"></a>InnoDB引擎</h3><h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><h4 id="事务原理"><a href="#事务原理" class="headerlink" title="事务原理"></a>事务原理</h4><h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><h3 id="MySQL管理"><a href="#MySQL管理" class="headerlink" title="MySQL管理"></a>MySQL管理</h3>]]></content>
+<h3 id="InnoDB引擎"><a href="#InnoDB引擎" class="headerlink" title="InnoDB引擎"></a>InnoDB引擎</h3><h4 id="逻辑存储结构"><a href="#逻辑存储结构" class="headerlink" title="逻辑存储结构"></a>逻辑存储结构</h4><p><img src="https://pic.imgdb.cn/item/65e6e8389f345e8d0322c09a.png" alt="alt text"></p>
+<ul>
+<li>表<br>是InnoDB存储引擎逻辑结构的最高层， 如果用户启用了参数 innodb_file_per_table(在8.0版本中默认开启)，则每张表都会有一个表空间（xxx.ibd，一个mysql实例可以对应多个表空间，用于<strong>存储记录、索引</strong>等数据</li>
+<li>段<br>分为数据段（Leaf node segment）、索引段（Non-leaf node segment）、回滚段（Rollback segment），InnoDB是索引组织表，数据段就是B+树的<strong>叶子节点</strong>， 索引段即为B+树的<strong>非叶子节点</strong>。段用来管理多个Extent（区）</li>
+<li>区<br>表空间的单元结构，每个区的大小为1M。 默认情况下，InnoDB存储引擎页大小为16K， 即一个区中一共有64个连续的页</li>
+<li>页<br>是InnoDB 存储引擎磁盘管理的最小单元，每个页的大小默认为 <strong>16KB</strong>。为了保证页的连续性，InnoDB 存储引擎每次从磁盘申请 4-5 个区</li>
+<li>行<br>InnoDB 存储引擎数据是按行进行存放的。<br>默认有两个隐藏字段：<ul>
+<li>Trx_id：每次对某条记录进行改动时，都会把对应的事务id赋值给trx_id隐藏列</li>
+<li>Roll_pointer：每次对某条引记录进行改动时，都会把旧的版本写入到undo日志中，然后这个隐藏列就相当于一个指针，可以通过它来找到该记录修改前的信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><p><img src="https://pic.imgdb.cn/item/65e6ae819f345e8d0397e0be.jpg" alt="alt text"></p>
+<h5 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h5><p><img src="https://pic.imgdb.cn/item/65e6aea89f345e8d03983ecd.jpg" alt="alt text"></p>
+<ul>
+<li><p>Buffer Pool<br>可以<strong>缓存磁盘</strong>上经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则从磁盘加载并缓存），然后再以一定频率刷新到磁盘，从而减少磁盘IO，加快处理速度<br>缓冲池以Page页为单位，底层采用<strong>链表</strong>数据结构管理Page</p>
+<ul>
+<li>free page：空闲page，未被使用</li>
+<li>clean page：被使用page，数据没有被修改过</li>
+<li>dirty page：脏页，被使用page，数据被修改过，也中数据与磁盘的数据产生了不一致</li>
+</ul>
+</li>
+<li><p>Change Buffer<br>更改缓冲区（针对于<strong>非唯一二级索引页</strong>），在执行DML语句时，如果这些数据Page没有在Buffer Pool中，不会直接操作磁盘，而会将数据变更存在更改缓冲区 Change Buffer中，在未来数据被读取时，再将数据合并恢复到Buffer Pool中，再将合并后的数据刷新到磁盘中</p>
+</li>
+<li><p>Adaptive Hash Index<br>InnoDB存储引擎会监控对表上各索引页的查询，如果观察到在特定的条件下hash索引可以提升速度，则建立hash索引</p>
+</li>
+<li><p>Log Buffer</p>
+<ul>
+<li>用来保存要写入到磁盘中的log日志数据（redo log 、undo log），默认大小为 16MB，日志缓冲区的日志会定期刷新到磁盘中。如果需要更新、插入或删除许多行的事务，增加日志缓冲区的大小可以节省磁盘 I&#x2F;O</li>
+<li>参数<br><code>innodb_log_buffer_size</code>：缓冲区大小<br><code>innodb_flush_log_at_trx_commit</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h5><p><img src="https://pic.imgdb.cn/item/65e6d4869f345e8d03f472f4.jpg" alt="alt text"></p>
+<ul>
+<li>System Tablespace<br><strong>更改缓冲区</strong>的存储区域。如果表是在系统表空间而不是每个表文件或通用表空间中创建的，它也可能包含表和索引数据。(在MySQL5.x版本中还包含InnoDB数据字典、undolog等)</li>
+<li>File-Per-Table Tablespaces<br>如果开启了innodb_file_per_table开关，则每个表的文件表空间包含单个InnoDB表的<strong>数据和索引</strong>，并存储在文件系统上的单个数据文件中</li>
+<li>General Tablespaces<ul>
+<li>创建表空间<br><code>CREATE TABLESPACE ts_name ADD DATAFILE &#39;file_name&#39; ENGINE = engine_name;</code></li>
+<li>创建时指定表空间<br><code>CREATE TABLE xxx ... TABLESPACE ts_name;</code></li>
+</ul>
+</li>
+<li>Undo Tablespaces<br><strong>撤销</strong>表空间，MySQL实例在初始化时会自动创建两个默认的undo表空间（初始大小16M），用于存储undo log日志</li>
+<li>Temporary Tablespaces<br>存储用户创建的<strong>临时表</strong>等数据</li>
+<li>Doublewrite Buffer Files<br>双写缓冲区，innoDB引擎将数据页从Buffer Pool刷新到磁盘前，先将数据页写入<strong>双写缓冲区</strong>文件中，便于系统异常时恢复数据</li>
+<li>Redo Log<br>用来实现事务的<strong>永久性</strong>，该日志文件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo log）,前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都会存到该日志中, 用于在刷新脏页到磁盘时,发生错误时, 进行数据恢复使用</li>
+</ul>
+<h5 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h5><p><strong>作用</strong>：将缓存区的数据在合适的时机刷新到磁盘文件中<br><img src="https://pic.imgdb.cn/item/65e6d7299f345e8d03fa665b.jpg" alt="alt text"></p>
+<p>分类：</p>
+<ul>
+<li>Master Thread<br>核心后台线程，负责调度其他线程，还负责将缓冲池中的数据异步刷新到磁盘中, 保持数据的一致性，还包括脏页的刷新、合并插入缓存、undo页的回收</li>
+<li>IO Thread<br>InnoDB存储引擎中大量使用了AIO来处理IO请求, 这样可以极大地提高数据库的性能，IO Thread主要负责这些IO请求的回调<br><img src="https://pic.imgdb.cn/item/65e6d7f49f345e8d03fc3a61.jpg" alt="alt text"></li>
+<li>Purge Thread<br>用于回收事务已经提交了的undo log，在事务提交之后，undo log可能不用了，就用它来回收</li>
+<li>Page Cleaner Thread<br>协助 Master Thread 刷新脏页到磁盘的线程，减轻 Master Thread 的工作压力，减少阻塞</li>
+</ul>
+<h4 id="事务原理"><a href="#事务原理" class="headerlink" title="事务原理"></a>事务原理</h4><p><img src="https://pic.imgdb.cn/item/65e6d9ae9f345e8d03005377.jpg" alt="alt text"></p>
+<ul>
+<li><p>redo log<br>重做日志，记录的是事务提交时数据页的物理修改，是用来实现事务的持久性</p>
+</li>
+<li><p>undo log</p>
+</li>
+</ul>
+<h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h4><h3 id="MySQL管理"><a href="#MySQL管理" class="headerlink" title="MySQL管理"></a>MySQL管理</h3><h4 id="系统数据库"><a href="#系统数据库" class="headerlink" title="系统数据库"></a>系统数据库</h4><p>自带四大数据库<br><img src="https://pic.imgdb.cn/item/65e6dc7f9f345e8d0306a008.jpg" alt="alt text"></p>
+<h4 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h4><h5 id="mysql-客户端工具"><a href="#mysql-客户端工具" class="headerlink" title="mysql-客户端工具"></a>mysql-客户端工具</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysql [options] [database]</span><br><span class="line">选项 ：</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name #指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] #指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name #指定服务器IP或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=port #指定连接端口</span></span><br><span class="line"><span class="operator">-</span>e, <span class="comment">--execute=name #执行SQL语句并退出</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-e</code>可以直接在mysql客户端执行sql语句，无需连接到数据库再执行</p>
+<h5 id="mysqladmin-管理工具"><a href="#mysqladmin-管理工具" class="headerlink" title="mysqladmin-管理工具"></a>mysqladmin-管理工具</h5><p>执行管理操作，检查服务器的配置和当前状态、创建并删除数据库等</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">语法:</span><br><span class="line">mysqladmin [options] command ...</span><br><span class="line">选项:</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name #指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] #指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name #指定服务器IP或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=port #指定连接端口</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlbinlog-二进制日志查看工具"><a href="#mysqlbinlog-二进制日志查看工具" class="headerlink" title="mysqlbinlog-二进制日志查看工具"></a>mysqlbinlog-二进制日志查看工具</h5><p>检查二进制日志文件的文本格式</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqlbinlog [options] log<span class="operator">-</span>files1 log<span class="operator">-</span>files2 ...</span><br><span class="line">选项 ：</span><br><span class="line"><span class="operator">-</span>d, <span class="comment">--database=name 指定数据库名称，只列出指定的数据库相关操作。</span></span><br><span class="line"><span class="operator">-</span>o, <span class="comment">--offset=# 忽略掉日志中的前n行命令。</span></span><br><span class="line"><span class="operator">-</span>r,<span class="comment">--result-file=name 将输出的文本格式日志输出到指定文件。</span></span><br><span class="line"><span class="operator">-</span>s, <span class="comment">--short-form 显示简单格式， 省略掉一些信息。</span></span><br><span class="line"><span class="comment">--start-datatime=date1 --stop-datetime=date2 指定日期间隔内的所有日志。</span></span><br><span class="line"><span class="comment">--start-position=pos1 --stop-position=pos2 指定位置间隔内的所有日志。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlshow-查看数据库-表-字段统计信息"><a href="#mysqlshow-查看数据库-表-字段统计信息" class="headerlink" title="mysqlshow-查看数据库&#x2F;表&#x2F;字段统计信息"></a>mysqlshow-查看数据库&#x2F;表&#x2F;字段统计信息</h5><p>客户端对象查找工具，用来快速查找存在哪些数据库、数据库中的表、表中的列或者索引</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqlshow [options] [db_name [table_name [col_name]]]</span><br><span class="line">选项 ：</span><br><span class="line"><span class="comment">--count 显示数据库及表的统计信息（数据库，表 均可以不指定）</span></span><br><span class="line"><span class="operator">-</span>i 显示指定数据库或者指定表的状态信息</span><br><span class="line">示例：</span><br><span class="line">#查询test库中每个表中的字段书，及行数</span><br><span class="line">mysqlshow <span class="operator">-</span>uroot <span class="operator">-</span>p2143 test <span class="comment">--count</span></span><br><span class="line">#查询test库中book表的详细情况</span><br><span class="line">mysqlshow <span class="operator">-</span>uroot <span class="operator">-</span>p2143 test book <span class="comment">--count</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqldump-数据备份工具"><a href="#mysqldump-数据备份工具" class="headerlink" title="mysqldump-数据备份工具"></a>mysqldump-数据备份工具</h5><p>来备份数据库或在不同数据库之间进行数据迁移,备份内容包含创建表，及插入表的SQL语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">语法 ：</span><br><span class="line">mysqldump [options] db_name [tables]</span><br><span class="line">mysqldump [options] <span class="comment">--database/-B db1 [db2 db3...]</span></span><br><span class="line">mysqldump [options] <span class="comment">--all-databases/-A</span></span><br><span class="line">连接选项 ：</span><br><span class="line"><span class="operator">-</span>u, <span class="comment">--user=name 指定用户名</span></span><br><span class="line"><span class="operator">-</span>p, <span class="comment">--password[=name] 指定密码</span></span><br><span class="line"><span class="operator">-</span>h, <span class="comment">--host=name 指定服务器ip或域名</span></span><br><span class="line"><span class="operator">-</span>P, <span class="comment">--port=# 指定连接端口</span></span><br><span class="line">输出选项：</span><br><span class="line"><span class="comment">--add-drop-database 在每个数据库创建语句前加上 drop database 语句</span></span><br><span class="line"><span class="comment">--add-drop-table 在每个表创建语句前加上 drop table 语句 , 默认开启 ; 不</span></span><br><span class="line">开启 (<span class="comment">--skip-add-drop-table)</span></span><br><span class="line"><span class="operator">-</span>n, <span class="comment">--no-create-db 不包含数据库的创建语句</span></span><br><span class="line"><span class="operator">-</span>t, <span class="comment">--no-create-info 不包含数据表的创建语句</span></span><br><span class="line"><span class="operator">-</span>d <span class="comment">--no-data 不包含数据</span></span><br><span class="line"><span class="operator">-</span>T, <span class="comment">--tab=name 自动生成两个文件：一个.sql文件，创建表结构的语句；一</span></span><br><span class="line">个.txt文件，数据文件</span><br></pre></td></tr></table></figure>
+
+<h5 id="mysqlimport-source-数据导入工具"><a href="#mysqlimport-source-数据导入工具" class="headerlink" title="mysqlimport&#x2F;source-数据导入工具"></a>mysqlimport&#x2F;source-数据导入工具</h5><p>客户端数据导入工具</p>
+<ul>
+<li>mysqlimport–导入mysqldump 加 -T 参数后导出的文本文件<br><code>mysqlimport [options] db_name textfile1 [textfile2...]</code></li>
+<li>source–导入sql文件<br><code>source /root/xxxxx.sql</code></li>
+</ul>
+]]></content>
       <categories>
         <category>Learn</category>
         <category>MySQL</category>
@@ -1083,6 +1166,103 @@
       </categories>
       <tags>
         <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Redis配置及使用的种种坑</title>
+    <url>/posts/10005.html</url>
+    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
+<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
+<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
+<li>如有错误欢迎指正</li>
+</ul>
+<hr>
+<p><strong>后续</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
+<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
+<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
+</li>
+<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
+</li>
+<li><p><strong>Ubuntu</strong></p>
+<ol>
+<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
+<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
+<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
+<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
+<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
+</ol>
+</li>
+</ol>
+<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
+<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
+<p>命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>可能出现权限问题 前面加上sudo即可</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
+<ul>
+<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
+<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
+</ul>
+<p>可能出现</p>
+<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
+<p>主要以下四条：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
+<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
+<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
+</ul>
+<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
+<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
+<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
+<p>常用指令</p>
+<ul>
+<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
+<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
+<li><code>-a 666</code>：指定redis的访问密码</li>
+</ul>
+<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
+<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
+<p>很好安 然后点击连接到redis服务器</p>
+<p><strong>！！！报错：连接不上</strong></p>
+<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
+<p>查阅了各大佬的解决方案，操作如下</p>
+<ul>
+<li>查看虚拟机ip <code>ifconfig</code></li>
+<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
+<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
+<li>检查redis.conf配置文件  –没啥毛病</li>
+<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
+<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
+<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
+</ul>
+</li>
+<li>检查windows防火墙入站规则</li>
+<li>重新加载redis</li>
+<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
+</ul>
+<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
+<p><strong>成功啦！</strong></p>
+<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
+<p>test成功</p>
+<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
+]]></content>
+      <categories>
+        <category>Learn</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1244,103 +1424,6 @@
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4>]]></content>
       <categories>
         <category>Learn</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于Redis配置及使用的种种坑</title>
-    <url>/posts/10005.html</url>
-    <content><![CDATA[<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><ul>
-<li>谨以此篇记录本🐭在学习redis时遇到的坑坑坑坑坑</li>
-<li>想到哪就更哪 可能不够全面，有点回忆不起来了</li>
-<li>如有错误欢迎指正</li>
-</ul>
-<hr>
-<p><strong>后续</strong><br>重安了一次虚拟机和redis…少了很多bug…也许是第一次安重复了导致的诸多问题</p>
-<p><strong>redis建议安装linux版本(官方)，虽然微软弄出来了windows版本，不过据说在一些方面比如io多路复用等有差别，建议linux</strong></p>
-<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><ol>
-<li><p><strong>VMware虚拟机</strong><br><strong>官方正版</strong>：不免费，仅30天试用期，曾经为了完成学校课程把30天免费全耗尽<br><strong>解决方法</strong>：下载vmware player 官方个人免费版，据说更新到现在功能也还算是完善，支持建虚拟机，暂时不知道后续使用有无需求，也许以后还是回归正版</p>
-</li>
-<li><p><strong>Linux</strong><br>linux有很多版本 这里选了ubuntu 可视化<br>主要就是下载镜像文件(清华大学开源镜像站)，新建虚拟机 balabala 不多赘述，有很多教程<br><strong>注意</strong>：安在一个空间较大的磁盘，别都挤在C盘里(没错，第一次安虚拟机不知道安了什么乱七八糟，最后C盘仅剩8G，这次长个教训😎)</p>
-</li>
-<li><p><strong>Ubuntu</strong></p>
-<ol>
-<li>ubuntu里采用的是apt-get安装，并非yum，如果很不幸的采用了yum安装，必然喜提报错<code>E:Unable to locate package yum</code><br><strong>解决方法</strong>：不使用yum</li>
-<li>ubuntu的bug问题 输入密码的时候光标不动，也不显示输入的密码或者隐式密码<br><strong>解决方法</strong>：实际上已经输进去了，输完直接enter就好</li>
-<li>redis基于C语言编写，编译需要有gcc，正常已经安装(build-essential)，如果没有gcc还需自行安装</li>
-<li>修改配置文件 由于没有vim 故采用vi命令<br>保存文件并退出 <code>:wq!</code> 后来发现ubuntu里面有test.editor，直接用很方便</li>
-<li>解压文件 tar -zxvf 这个出现问题的话可能是别的问题，比如压缩包，解压命令问题概率很小</li>
-</ol>
-</li>
-</ol>
-<h3 id="redis安装"><a href="#redis安装" class="headerlink" title="redis安装"></a>redis安装</h3><p>据说用docker很方便，没试过</p>
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>官网 <a href="https://redis.io/">https://redis.io</a> 下载安装包(建议稳定版)</p>
-<p><strong>缺点</strong>：直接下载到win系统，需要把压缩包上传到linux，很麻烦<br><strong>解决方法</strong>：这里选取的是FileZilla工具，这之中需要连接虚拟机，可能会产生一些报错(忘记什么报错了，依稀记得是虚拟机连接不上)</p>
-<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>直接在linux里安装，很快很爽</p>
-<p>命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h4 id="解压及安装"><a href="#解压及安装" class="headerlink" title="解压及安装"></a>解压及安装</h4><p>解压：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-7.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>安装：<br>先切换到刚刚安的redis-7.2.4目录下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>可能出现权限问题 前面加上sudo即可</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><h5 id="前台运行"><a href="#前台运行" class="headerlink" title="前台运行"></a>前台运行</h5><p><code>sudo redis-server</code></p>
-<ul>
-<li>报错一：运行后出现Failed listening on port 6379(TCP)<br>说明6379端口被占用问题<br><strong>解决方法</strong>：查看redis端口情况<code>ps -ef | grep redis</code><br>发现有两行，将第一行进程杀掉<code>sudo kill -9 (PID)</code></li>
-<li>报错二：kill后重新查看端口发现还是有两行<br><strong>解决方法</strong>：百度了一下是redis保护问题，即使杀掉又回有一个新的出来，直接采取命令<code>sudo /etc/init.d/redis-server stop</code>，再查看发现杀掉了，再次启动成功</li>
-</ul>
-<p>可能出现</p>
-<h5 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h5><p>修改redis.conf配置文件(修改最终想指定执行的那个文件，不要修改错文件了)</p>
-<p>主要以下四条：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">daemonize yes 允许后台运行</span><br><span class="line">protected-mode no 关闭守护模式，允许除了本机以外的其他连接</span><br><span class="line"># bind 127.0.0.1 注释掉</span><br><span class="line">requirepass 666(密码设置)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>报错一 <code>set-pro-title yes</code>balabala(后面忘了)<br><strong>解决方法</strong>：多半是redis配置问题，或者安装路径混了，找不到文件，为了省事—重新下载redis，一定一定注意下载、安装目录等</li>
-<li>报错二 重安了一次，没有报错一了(果然遇到困难解决不了的方法就是重头再来！！！)，但这次有了新的报错<code>You need tcl 8.5 or ...</code><br><strong>解决方法</strong>：安！tcl 8.5+版本 不多赘述，直接在linux里下载即可</li>
-<li>报错三 终于终于解决了报错一二，又出现了三🙄，果然人生充满起起落落，这次是<code>Memory overcommit must be enabled!</code><br><strong>解决方法</strong>：后面给出了解决方法,输入命令<code>sudo sysctl vm.overcommit_memory=1</code><br><strong>注意</strong>：这个是每次都要重新声明，很麻烦(唉…)<br>可以采取修改配置文件的方式，一劳永逸(自行百度，忘了)</li>
-</ul>
-<p>报错解决后<br><code>sudo redis-server /启动的配置文件路径(redis.conf)</code><br>启动成功</p>
-<h4 id="redis连接"><a href="#redis连接" class="headerlink" title="redis连接"></a>redis连接</h4><p>此时此刻终于可以启动redis了</p>
-<h5 id="redis-cli客户端连接"><a href="#redis-cli客户端连接" class="headerlink" title="redis-cli客户端连接"></a>redis-cli客户端连接</h5><p><code>redis-cli</code>进入交互控制台<br>输入ping 回应pong说明redis已启动<br><code>redis-cli shutdown</code><br>取消连接</p>
-<p>常用指令</p>
-<ul>
-<li><code>-h 127.0.0.1</code>：指定要连接的redis节点的IP地址，默认是127.0.0.1</li>
-<li><code>-p 6379</code>：指定要连接的redis节点的端口，默认是6379</li>
-<li><code>-a 666</code>：指定redis的访问密码</li>
-</ul>
-<h5 id="RESP-APP可视化redis"><a href="#RESP-APP可视化redis" class="headerlink" title="RESP.APP可视化redis"></a>RESP.APP可视化redis</h5><p>卡了我好久的麻烦来了</p>
-<p>首先安装包<br><a href="https://github.com/lework/RedisDesktopManager-Windows/releases">https://github.com/lework/RedisDesktopManager-Windows/releases</a></p>
-<p>很好安 然后点击连接到redis服务器</p>
-<p><strong>！！！报错：连接不上</strong></p>
-<p>127.0.0.1连接不上<br>改成虚拟机ip也连接不上</p>
-<p>查阅了各大佬的解决方案，操作如下</p>
-<ul>
-<li>查看虚拟机ip <code>ifconfig</code></li>
-<li>win上cmd查看是否能与虚拟机联通  –发现能ping通</li>
-<li>连接规则桥接模式  –应该跟这个没啥关系，寄</li>
-<li>检查redis.conf配置文件  –没啥毛病</li>
-<li>查看linux防火墙是否开放6379端口  –发现根本没有firewalld。。。遂安装<ul>
-<li>开放6379端口 命令自行百度   –开放了但还是寄</li>
-<li>重载防火墙，查看开放的端口(后来又添加了3306端口)</li>
-</ul>
-</li>
-<li>检查windows防火墙入站规则</li>
-<li>重新加载redis</li>
-<li>命令 <code>redis-cli -h 虚拟机ip -p 6379</code> 如果出现 虚拟机ip:6379&gt;即为连接成功</li>
-</ul>
-<p><strong>总结</strong><br>继防火墙端口开放，win防火墙新建入站规则、更改保存redis.conf后还是寄<br>最终猜测我的成功路径应该是先杀掉占用6379的进程(…stop)–&gt;重新启动redis-server–&gt;redis-cli -h ip -p 6379</p>
-<p><strong>成功啦！</strong></p>
-<h3 id="redis的java客户端"><a href="#redis的java客户端" class="headerlink" title="redis的java客户端"></a>redis的java客户端</h3><p>这里先采取Jedis简单测试了一下</p>
-<p>test成功</p>
-<p>如果RESP连接不上，那Jedis多半连接凉凉<br>本质应该是一样的，都是在win上连接linux当中运行的redis</p>
-]]></content>
-      <categories>
-        <category>Learn</category>
-        <category>Redis</category>
       </categories>
       <tags>
         <tag>java</tag>
